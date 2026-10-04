@@ -1,0 +1,110 @@
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(/backend/app/static/images/app_assets/login-background2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+
+}
+
+.login-header {
+    margin-bottom: 20px;
+}
+
+.login-title {
+    font-size: 11pt;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.login-header img {
+    width: 300px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-input input {
+    flex: 1;
+    padding: 10px;
+    border-bottom: 2px solid white !important;
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+}
+
+.form-input input::placeholder {
+    color: white;
+}
+
+.form-input label {
+    font-size: 10pt;
+    color: white;
+}
+
+.btn {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0438ff;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0488ff;
+}
+
+.forgot-password {
+    font-size: 10pt;
+    color: white;
+    text-align: center;
+}
+
+.login-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    font-size: 10pt;
+}
+
+.login-footer img {
+    width: 170px;
+}
+
+.engineered-by {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
