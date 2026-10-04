@@ -4,42 +4,50 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>sona.guard - Login</title>
-	<link rel="stylesheet" href="/backend/app/static/css/login.css">
-	<script src="https://kit.fontawesome.com/08c0396a01.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="/backend/app/static/css/main.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
-	<div class="login-container">
-	    <div class="login-header">
-			<img src="/backend/app/static/images/sona.guard_assets/sg_logo-full.png" alt="sona.guard logo">
-		</div>
-		<p class="login-title"><i class="fas fa-circle-exclamation"></i> Please log in to access your account</p>
-		<div class="login-form">
-		    <div class="form-group">
-				<div class="form-label"><label for="employee-id">Employee ID</label></div>	
-				<div class="form-input">
-				    <i class="fas fa-user"></i>
-					<input type="text" id="employee-id" name="employee-id" placeholder="Enter your employee ID" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="form-label"><label for="password">Password</label></div>
-				<div class="form-input">
-				    <i class="fas fa-lock"></i>
-					<input type="password" id="password" name="password" placeholder="Enter your password" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="form-input"><button class="btn btn-primary" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button></div>
+	{% extends "base.html" %}
+	{% block content %}
+		<div class="login-container">
+			<div class="login-header">
+				<img src="{{ url_for('static', filename='images/sona.guard_assets/sg_logo-full.png') }}" alt="sona.guard logo">
 			</div>
 
-			<p class="forgot-password"><i class="fas fa-circle-exclamation"></i> Forgot your password? Please contact your administrator.</p>
-		</div>
-	</div>
+			<p class="login-title"><i class="fas fa-circle-exclamation"></i> Please log in to access your account</p>
 
-	<footer class="login-footer">
-		<p>&copy; 2026 sona.guard. All rights reserved.</p>
-		<p class="engineered-by"><i class="fas fa-laptop"></i> Engineered by <img src="/backend/app/static/images/app_assets/oriah.studios-logo.png" alt="oriah.studios logo"></p>
-	</footer>
+			<form id="login-form" class="login-form" autocomplete="off" action="">
+
+				<div class="form-group">
+					<div class="form-label"><label for="employee-id">Employee ID</label></div>	
+					<div class="form-input">
+						<i class="fas fa-user"></i>
+						<input type="text" id="employee-id" autocomplete="off" name="employee-id" placeholder="Enter your employee ID" required>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="form-label"><label for="password">Password</label></div>
+					<div class="form-input">
+						<i class="fas fa-lock"></i>
+						<input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="off">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="form-input"><button id="login-button" class="btn btn-primary" type="submit"><i class="fas fa-sign-in-alt"></i> Sign In</button></div>
+				</div>
+
+				<p class="forgot-password"><i class="fas fa-circle-exclamation"></i> Forgot your password? Please contact your administrator.</p>
+			</form>
+		</div>
+
+		<footer class="login-footer">
+			<p>&copy; 2026 sona.guard. All rights reserved.</p>
+			<p class="engineered-by"><i class="fas fa-laptop"></i> Engineered by <img src="{{ url_for('static', filename='images/app_assets/oriah.studios-logo.png') }}" alt="oriah.studios logo"></p>
+		</footer>
+		
+	<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+	{% endblock %}
 </body>
 </html>
