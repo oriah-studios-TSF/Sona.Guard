@@ -4,7 +4,7 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    background-image: url(/static/images/app_assets/login-background2.jpg);
+    background-color:#27313b;
     background-size: cover;
     background-repeat: no-repeat;
     color: white;
@@ -17,17 +17,17 @@ body {
 }
 
 .login-header {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .login-title {
     font-size: 11pt;
     margin-bottom: 20px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .login-header img {
-    width: 300px;
+    width: 250px;
 }
 
 .login-form {
@@ -50,7 +50,7 @@ body {
 
 .form-input input {
     flex: 1;
-    padding: 10px;
+    padding: 10px 0;
     border-bottom: 2px solid white !important;
     border: none;
     outline: none;
@@ -64,6 +64,7 @@ body {
 
 .form-input input:focus {
     border-bottom: 2px solid #0438ff !important;
+    background: none !important;
 }
 
 .form-input label {
@@ -103,12 +104,31 @@ body {
 }
 
 .login-footer img {
-    width: 170px;
+    width: 150px;
 }
 
 .engineered-by {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.field-error {
+    display: none;
+    color: red;
+    font-size: 9pt;
+    border-radius: 5px;
+}
+
+
+/* Remove the browser's autofill background colour */
+.login-form input:-webkit-autofill,
+.login-form input:-webkit-autofill:hover,
+.login-form input:-webkit-autofill:focus,
+.login-form input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    -webkit-text-fill-color: white;
+    caret-color: inherit;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
