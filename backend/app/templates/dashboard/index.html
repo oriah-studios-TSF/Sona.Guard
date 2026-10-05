@@ -13,6 +13,8 @@
 			<p>You are successfully authenticated.</p>
 			<input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
 		</div>
+
+		<button class="logout-button" id="logout-button">Logout</button>
 	{% endblock %}
 </body>
 </html>
