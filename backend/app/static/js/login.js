@@ -9,6 +9,14 @@ const passwordError = document.getElementById('password-error');
 
 const toast = document.getElementById('toast');
 
+const serverToastData = document.getElementById('server-toast-data');
+
+if (serverToastData) {
+    toast.innerHTML = `<i class="fas fa-triangle-exclamation"></i> ${serverToastData.dataset.message}`
+    toast.classList.add(serverToastData.dataset.category);
+    toast.style.display = 'block';
+}
+
 loginForm.addEventListener('submit', async function (event) {
     event.preventDefault();
 
@@ -40,10 +48,10 @@ loginForm.addEventListener('submit', async function (event) {
     }
 
     loginButton.disabled = true;
-    loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+    loginButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
 
     try {
-        const response = await fetch('/auth/sign-in', {
+        const response = await fetch('/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,12 +72,12 @@ loginForm.addEventListener('submit', async function (event) {
             toast.style.display = 'block';
 
             loginButton.disabled = false;
-            loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+            loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
 
             return;
         }
 
-        window.location.href = '/dashboard';
+        window.location.href = '/dashboard/';
         
     } catch (error) {
         toast.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Unable to connect to the server. Please try again.`;
@@ -77,6 +85,6 @@ loginForm.addEventListener('submit', async function (event) {
         toast.style.display = 'block';
 
         loginButton.disabled = false;
-        loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
     }
 });

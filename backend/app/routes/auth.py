@@ -1,12 +1,12 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_user
+from flask_login import login_user, logout_user, login_required
 
 from app.models import User
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-@auth_bp.route('/sign-in', methods=['POST'])
-def sign_in():
+@auth_bp.route('/login', methods=['POST'])
+def login():
     
     data = request.get_json()
     
@@ -23,4 +23,11 @@ def sign_in():
     
     login_user(user)
     
-    return jsonify({'success': True, 'message': 'Sign in successful.'}), 200
+    return jsonify({'success': True, 'message': 'Login successful.'}), 200
+
+@auth_bp.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    logout_user()
+    return jsonify({'success': True, 'message': 'You have been logged out successfully.'}), 200
+

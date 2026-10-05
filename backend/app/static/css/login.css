@@ -121,7 +121,7 @@ body {
     border-radius: 5px;
 }
 
-.toast {
+.toast, .serve-toast-data {
     position: fixed;
     display: none;
     top: 20px;

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sona.Guard - Dashboard</title>
+</head>
+<body>
+    {% extends "base.html" %}
+	{% block content %}
+	    <div class="dashboard-container">
+			<h1>Dashboard</h1>
+			<p>You are successfully authenticated.</p>
+			<input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
+		</div>
+	{% endblock %}
+</body>
+</html>

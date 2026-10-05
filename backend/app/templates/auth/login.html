@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>sona.guard - Sign In</title>
+	<title>Sona.Guard - Login</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
@@ -11,6 +11,14 @@
 	{% block content %}
 		<div class="login-container">
 		<p id="toast" class="toast toast"></p>
+
+		{% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p id="server-toast-data" data-category="{{ category }}" data-message="{{ message }}"></p>
+                {% endfor %}
+            {% endif %}
+		{% endwith %}
 			<div class="login-header">
 				<img src="{{ url_for('static', filename='images/sona.guard_assets/sg_logo-full.png') }}" alt="sona.guard logo">
 			</div>
@@ -39,7 +47,7 @@
 				</div>
 
 				<div class="form-group">
-					<div class="form-input"><button id="login-button" class="btn btn-primary" type="submit"><i class="fas fa-sign-in-alt"></i> Sign In</button></div>
+					<div class="form-input"><button id="login-button" class="btn btn-primary" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button></div>
 				</div>
 
 				<p class="forgot-password"><i class="fas fa-circle-exclamation"></i> Forgot your password? Please contact your administrator.</p>
