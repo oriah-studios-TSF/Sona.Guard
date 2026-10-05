@@ -10,29 +10,29 @@
 	{% extends "base.html" %}
 	{% block content %}
 		<div class="login-container">
+		<p id="toast" class="toast toast"></p>
 			<div class="login-header">
 				<img src="{{ url_for('static', filename='images/sona.guard_assets/sg_logo-full.png') }}" alt="sona.guard logo">
 			</div>
 
-			<p class="login-title"><i class="fas fa-circle-exclamation"></i> Please sign in in to access your account</p>
 
 			<form id="login-form" class="login-form" autocomplete="off" action="">
 
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
 				<div class="form-group">
-					<div class="form-label"><label for="employee-id">Employee ID</label></div>	
 					<div class="form-input">
 						<i class="fas fa-user"></i>
-						<input type="text" id="employee-id" autocomplete="off" name="employee-id" placeholder="Enter your employee ID">
+						<input type="text" id="employee-id" autocomplete="off" name="employee-id" placeholder="Employee ID">
 					</div>
 
 					<p class="field-error" id="employee-id-error"></p>
 				</div>
 
 				<div class="form-group">
-					<div class="form-label"><label for="password">Password</label></div>
 					<div class="form-input">
 						<i class="fas fa-lock"></i>
-						<input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="off">
+						<input type="password" id="password" name="password" placeholder="Password" autocomplete="off">
 					</div>
 
 					<p class="field-error" id="password-error"></p>
@@ -47,8 +47,8 @@
 		</div>
 
 		<footer class="login-footer">
-			<p>&copy; 2026 sona.guard. All rights reserved.</p>
-			<p class="engineered-by"><i class="fas fa-laptop"></i> Engineered by <img src="{{ url_for('static', filename='images/app_assets/oriah.studios-logo.png') }}" alt="oriah.studios logo"></p>
+			<img src="{{ url_for('static', filename='images/app_assets/oriah.studios-logo.png') }}" alt="oriah.studios logo">
+			<p class="monitor"><i class="fas fa-video"></i> Authorized Personnel Only. All access attempts are monitored and recored</p>
 		</footer>
 
 	<script src="{{ url_for('static', filename='js/login.js') }}"></script>
