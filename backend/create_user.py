@@ -6,12 +6,12 @@ app = create_app()
 
 with app.app_context():
     user = User(
-        employee_id='SG001',
-        full_name='system Administrator',
-        role='admin'
+        employee_id='SG002',
+        full_name='Security Officer',
+        role='security_officer'
     )
 
-    user.set_password('Ramotsepane.02')
+    user.set_password('Officer123!')
 
     db.session.add(user)
     db.session.commit()
