@@ -15,6 +15,14 @@ def create_app():
     login_manager.init_app(app)
     limiter.init_app(app)
 
+    @app.after_request
+    def set_security_headers(response):
+        response.headers['X-Content-Type-Options'] = 'nosniff'  # Prevents MIME type sniffing, as in browsers trying to guess the content type
+        response.headers['X-Frame-Options'] = 'SAMEORIGIN'  # Prevents clickjacking by only allowing the same origin to load the content
+        response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'  # Prevents leaking the referrer to cross-origin requests
+        
+        return response
+
     login_manager.login_view = 'main.home'
     login_manager.login_message = 'Please login to access the Sona.Guard dashboard.'
     login_manager.login_message_category = 'error'
