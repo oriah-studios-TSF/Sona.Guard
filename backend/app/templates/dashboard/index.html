@@ -3,18 +3,46 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Sona.Guard - Dashboard</title>
+	<title>Sona.Guard - {{ title }}</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 </head>
 <body>
-    {% extends "base.html" %}
-	{% block content %}
-	    <div class="dashboard-container">
-			<h1>Dashboard</h1>
-			<p>You are successfully authenticated.</p>
-			<input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
-		</div>
+    {% extends "main-base.html" %}
+    {% block content %}
+        <section class="section system-overview">
+            <div class="cards">
+                <div class="card">
+                    <span class="card-title">Active People</span>
+                    <span class="card-value">1,260</span>
+                    <span class="card-description"><i class="fas fa-circle-info"></i> People currently active in the system.</span>
+                </div>
 
-		<button class="logout-button" id="logout-button">Logout</button>
-	{% endblock %}
+                <div class="card">
+                    <span class="card-title">Entrances</span>
+                    <span class="card-value">11/12</span>
+                    <span class="card-description"><i class="fas fa-circle-info"></i> 11 of 12 entrances are currently active.</span>
+                </div>
+
+                <div class="card">
+                    <span class="card-title">Denied Today</span>
+                    <span class="card-value">17</span>
+                    <span class="card-description"><i class="fas fa-circle-info"></i> Access attempts denied today.</span>
+                </div>
+
+                <div class="card">
+                    <span class="card-title">Alerts</span>
+                    <span class="card-value">12</span>
+                    <span class="card-description"><i class="fas fa-circle-info"></i> Number of active alerts.</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section system-intelligence-feed">
+            <div class="section-header">
+                <h2>System Intelligence Feed</h2>
+                <p></p>
+            </div>
+        </section>
+    {% endblock %}
 </body>
 </html>

@@ -7,10 +7,10 @@ dashboard_bp = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 @dashboard_bp.route('/')
 @login_required
 def index():
-    return render_template('dashboard/index.html')
+    return render_template('dashboard/index.html', title='System Overview', title_description='Monitor and manage access across your facility.', icon='tachometer-alt')
 
 @dashboard_bp.route('/admin-test')
-@role_required('admin')
+@role_required('System Administrator')
 def admin_test():
     return 'Admin authorization successful'
 

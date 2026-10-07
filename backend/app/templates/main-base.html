@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://kit.fontawesome.com/08c0396a01.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main-base.css') }}">
+</head>
+<body>
+    <div class="main-container">
+		<div class="sidebar">
+		    <div class="sidebar-header">
+				<img src="{{ url_for('static', filename='images/sona.guard_assets/sg_logo-full.png') }}" alt="sona.guard logo">
+				<button type="button">Administrator Console <i class="fas fa-chevron-down"></i></button>
+			</div>
+			<div class="sidebar-content">
+				<div class="nav system-nav">
+				    <p>System</p>
+				    <a href=""><i class="fas fa-gauge-high"></i> System Overview</a>
+				</div>
+				
+				<div class="nav access-nav">
+				    <p>Access Control</p>
+				    <a href=""><i class="fas fa-user-check"></i> Access Verification</a>
+				</div>
+				
+				<div class="nav management-nav">
+				    <p>Management</p>
+				    <a href=""><i class="fas fa-users"></i> People</a>
+					<a href=""><i class="fas fa-door-open"></i> Entrances</a>
+				    <a href=""><i class="fas fa-key"></i> Permissions</a>
+				</div>
+				
+				<div class="nav monitoring-nav">
+				    <p>Monitoring</p>
+				    <a href=""><i class="fas fa-list-check"></i> Access Attempts</a>
+					<a href=""><i class="fas fa-file-shield"></i> Audit Logs</a>
+				</div>
+				
+				<div class="nav admin-nav">
+				    <p>Administration</p>
+				    <a href=""><i class="fas fa-users-gear"></i> Users</a>
+					<a href=""><i class="fas fa-gear"></i> Settings</a>
+				</div>
+				
+			</div>
+			
+			<div class="sidebar-footer">
+			    <div class="current-user">
+					<div class="left">
+						<i class="fas fa-user"></i>
+						<div class="user-info">
+							<h2>{{ current_user.full_name }}</h2>
+							<p>{{ current_user.role }}</p>
+						</div>
+					</div>
+					<div class="right">
+						<button type="button" id="logout-button" class="logout-button" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="main-content">
+			<div class="main-content-header">
+    			<div class="left">
+    				<h1><i class="fas fa-{{ icon }}"></i> {{ title }}</h1>
+    				<p>{{ title_description }}</p>
+    			</div>
+    			<div class="right">
+    				
+    			</div>
+			</div>
+			{% block content %}
+			{% endblock %}
+		</div>
+    
+    </div>
+</body>
+</html>

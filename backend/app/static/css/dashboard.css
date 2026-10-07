@@ -1,0 +1,49 @@
+.section {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.section-header h2 {
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+.section-header p {
+    font-size: 10pt;
+    margin-top: 5px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card {
+    flex: 1 1 200px;
+    border: 2px solid lightslategray;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    padding: 20px 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 10pt;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.card-value {
+    font-size: 18pt;
+}
+
+.card-description {
+    font-size: 8pt;
+    margin-top: 15px;
+}
+
+.system-intelligence-feed {
+    margin-top: 20px;
+}

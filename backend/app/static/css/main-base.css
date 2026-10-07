@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #27313b;
+    color: white;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 300px;
+    border-right: 1px solid lightslategray;
+}
+
+.sidebar-header {
+    padding: 15px 15px;
+}
+
+.sidebar-header button {
+    font-size: 10pt;
+    margin-top: 5px;
+    background-color: transparent;
+    color: lightslategray;;
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar-header button:hover {
+    color: white;
+}
+
+.sidebar-header img {
+    width: 120px;
+    height: auto;
+}
+
+.sidebar-content {
+    padding: 15px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-content a {
+    color: lightslategray;
+    text-decoration: none;
+    font-size: 10pt;
+    margin-left: 10px;
+}
+
+.sidebar-content .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-content .nav p {
+    font-size: 9pt;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+}
+
+.sidebar-content a:hover {
+    color: white;
+}
+
+.sidebar-footer {
+    padding: 20px 15px;
+    position: fixed;
+    bottom: 0;
+    width: 300px;
+}
+
+.current-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    color: #27313b;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.current-user .left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-footer i {
+    font-size: 15pt;
+}
+
+.sidebar-footer h2 {
+    font-size: 10pt;
+    font-weight: 500;
+}
+
+.sidebar-footer p {
+    font-size: 9pt;
+    font-weight: 400;
+}
+
+.logout-button {
+    background-color: transparent;
+    color: lightslategray;
+    border: none;
+    cursor: pointer;
+    font-size: 10pt;
+}
+
+.logout-button:hover {
+    color: #0438ff;
+}
+
+.main-content {
+    width: calc(100% - 300px);
+    min-height: 100vh;
+}
+
+.main-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+}
+
+.main-content-header h1 {
+    font-size: 15pt;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.main-content-header p {
+    font-size: 10pt;
+    font-weight: 400;
+}
+
