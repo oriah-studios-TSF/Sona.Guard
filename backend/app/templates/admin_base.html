@@ -28,12 +28,12 @@
 			<div class="sidebar-content">
 				<div class="nav system-nav">
 				    <p>System</p>
-				    <a href=""><i class="fas fa-gauge-high"></i> System Overview</a>
+				    <a class="{% if request.endpoint == 'dashboard.index' %}active{% endif %}" href="{{ url_for('dashboard.index') }}"><i class="fas fa-gauge-high"></i> System Overview</a>
 				</div>
 				
 				<div class="nav access-nav">
 				    <p>Access Control</p>
-				    <a href=""><i class="fas fa-user-check"></i> Access Verification</a>
+				    <a class="{% if request.endpoint == 'access_control.verification' %}active{% endif %}" href="{{ url_for('access_control.verification') }}"><i class="fas fa-user-check"></i> Access Verification</a>
 				</div>
 				
 				<div class="nav management-nav">

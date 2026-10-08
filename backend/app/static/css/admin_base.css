@@ -184,4 +184,8 @@ body {
     color: #ffffff;
 }
 
+.nav a.active {
+    color: white;
+}
+
 

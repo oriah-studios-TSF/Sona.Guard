@@ -1,9 +1,21 @@
-from flask import Blueprint, jsonify, request
-from flask_login import current_user
+from flask import Blueprint, jsonify, request, render_template
+from flask_login import current_user, login_required
 
 from app.services.access_control import verify_access
 
 access_control_bp = Blueprint('access_control', __name__, url_prefix='/access')
+
+
+@access_control_bp.route('/verfication')
+@login_required
+def verification():
+    return render_template(
+        'access/verification.html',
+        title='Access Verification',
+        icon='user-check',
+        title_description='Verify whether a person is permitted to access a specific entrance.'
+        )
+
 
 @access_control_bp.route('/verify', methods=['POST'])
 def verify():
