@@ -29,7 +29,8 @@ def verify_access(person_id, entrance_id, user_id=None):
     if not person:
         return {
             'result': 'DENIED',
-            'reason': 'Person not found.'
+            'reason': 'Person not found.',
+            'access_attempt_id': None
         }
 
     if not person.is_active:
@@ -45,7 +46,8 @@ def verify_access(person_id, entrance_id, user_id=None):
     if not entrance:
         return {
             'result': 'DENIED',
-            'reason': 'Entrance not found.'
+            'reason': 'Entrance not found.',
+            'access_attempt_id': None
         }
 
     if not entrance.is_active:
@@ -60,7 +62,7 @@ def verify_access(person_id, entrance_id, user_id=None):
 
     permission = Permission.query.filter_by(
         person_id=person.id,
-        entance_id=entrance.id,
+        entrance_id=entrance.id,
         is_active=True
     ).first()
 
@@ -71,7 +73,7 @@ def verify_access(person_id, entrance_id, user_id=None):
             None,
             user_id,
             'DENIED',
-            'No active permssion found.'
+            'No active permission found.'
         )
 
     now = datetime.now(timezone.utc)
