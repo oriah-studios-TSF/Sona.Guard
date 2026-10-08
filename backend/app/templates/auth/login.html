@@ -9,16 +9,16 @@
 <body>
 	{% extends "base.html" %}
 	{% block content %}
-		<div class="login-container">
-		<p id="toast" class="toast toast"></p>
-
-		{% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <p id="server-toast-data" data-category="{{ category }}" data-message="{{ message }}"></p>
-                {% endfor %}
-            {% endif %}
-		{% endwith %}
+        <div class="login-container">
+    		<p id="toast" class="toast toast"></p>
+    
+    		{% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p id="server-toast-data" data-category="{{ category }}" data-message="{{ message }}"></p>
+                    {% endfor %}
+                {% endif %}
+    		{% endwith %}
 			<div class="login-header">
 				<img src="{{ url_for('static', filename='images/sona.guard_assets/sg_logo-full.png') }}" alt="sona.guard logo">
 			</div>

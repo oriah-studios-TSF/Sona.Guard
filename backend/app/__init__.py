@@ -3,7 +3,7 @@ from flask import Flask
 from app.config import Config
 from app.extensions import db, csrf, migrate, login_manager, limiter
 from app.models import User
-from app.routes import main_bp, auth_bp, dashboard_bp
+from app.routes import main_bp, auth_bp, dashboard_bp, access_control_bp
 
 def create_app():
     app = Flask(__name__)
@@ -35,5 +35,6 @@ def create_app():
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
+    app.register_blueprint(access_control_bp)
 
     return app
