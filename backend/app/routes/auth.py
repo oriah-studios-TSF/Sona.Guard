@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, flash
 from flask_login import login_user, logout_user, login_required, current_user
 
 from app.models import User
@@ -30,6 +30,8 @@ def login():
     login_user(user)
 
     log_event('LOGIN_SUCCESS', 'User logged in successfully.', user_id=user.id)
+
+    flash('You have successfully been logged in.', 'success')
     
     return jsonify({'success': True, 'message': 'Login successful.'}), 200
 
@@ -41,6 +43,9 @@ def logout():
     log_event('LOGOUT_SUCCESS', 'User logged out successfully.', user_id=user_id)
     
     logout_user()
+
+    flash('You have been logged out successfully.', 'success')
+    
     return jsonify({'success': True, 'message': 'You have been logged out successfully.'}), 200
 
 @auth_bp.errorhandler(429)

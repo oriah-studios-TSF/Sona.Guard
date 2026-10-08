@@ -11,10 +11,31 @@ const toast = document.getElementById('toast');
 
 const serverToastData = document.getElementById('server-toast-data');
 
-if (serverToastData) {
-    toast.innerHTML = `<i class="fas fa-triangle-exclamation"></i> ${serverToastData.dataset.message}`
-    toast.classList.add(serverToastData.dataset.category);
+function showToast(message, category = 'error') {
+    let icon = 'fa-triangle-exclamation';
+
+    if (category === 'success') {
+        icon = 'fa-circle-check';
+    } else if (category === 'info') {
+        icon = 'fa-circle-info';
+    }
+
+    toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+
+    toast.className = 'toast';
+    toast.classList.add(category);
     toast.style.display = 'block';
+
+    toastTimeout = setTimeout(() => {
+        toast.style.display = 'none';
+    }, 4000);
+}
+
+if (serverToastData) {
+    showToast(
+        serverToastData.dataset.message,
+        serverToastData.dataset.category
+    );
 }
 
 loginForm.addEventListener('submit', async function (event) {
@@ -67,9 +88,7 @@ loginForm.addEventListener('submit', async function (event) {
         const data = await response.json();
         
         if (!response.ok || !data.success) {
-            toast.innerHTML = `<i class="fas fa-triangle-exclamation"></i> ${data.message}`;
-            toast.classList.add('error');
-            toast.style.display = 'block';
+            showToast(data.message, 'error');
 
             loginButton.disabled = false;
             loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
@@ -80,9 +99,7 @@ loginForm.addEventListener('submit', async function (event) {
         window.location.href = '/dashboard/';
         
     } catch (error) {
-        toast.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Unable to connect to the server. Please try again.`;
-        toast.classList.add('error');
-        toast.style.display = 'block';
+        showToast('Unable to connect to the server. Please try again.', 'error');
 
         loginButton.disabled = false;
         loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';

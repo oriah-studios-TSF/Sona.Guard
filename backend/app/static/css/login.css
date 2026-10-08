@@ -134,9 +134,26 @@ body {
     font-size: 9pt;
 }
 
-.error {
-    background-color: red;
+.toast.success {
+    background-color: #0438ff;
+    color: #ffffff;
 }
+
+.toast.error {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.toast.warning {
+    background-color: #f59f00;
+    color: #ffffff;
+}
+
+.toast.info {
+    background-color: #0d6efd;
+    color: #ffffff;
+}
+
 
 
 /* Remove the browser's autofill background colour */

@@ -152,3 +152,36 @@ body {
     font-weight: 400;
 }
 
+.toast, .serve-toast-data {
+    position: fixed;
+    display: none;
+    top: 20px;
+    right: 20px;
+    background-color: #0438ff;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 9pt;
+}
+
+.toast.success {
+    background-color: #0438ff;
+    color: #ffffff;
+}
+
+.toast.error {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.toast.warning {
+    background-color: #f59f00;
+    color: #ffffff;
+}
+
+.toast.info {
+    background-color: #0d6efd;
+    color: #ffffff;
+}
+
+

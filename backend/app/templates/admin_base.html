@@ -5,9 +5,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<script src="https://kit.fontawesome.com/08c0396a01.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/main-base.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_base.css') }}">
 </head>
 <body>
+    <p id="toast" class="toast"></p>
+    <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p id="server-toast-data" data-category="{{ category }}" data-message="{{ message }}"></p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
     <div class="main-container">
 		<div class="sidebar">
 		    <div class="sidebar-header">
@@ -75,7 +86,7 @@
 			{% block content %}
 			{% endblock %}
 		</div>
-    
     </div>
+   	<script src="{{ url_for('static', filename='js/admin_base.js') }}"></script>
 </body>
 </html>
