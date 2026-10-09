@@ -29,6 +29,7 @@
 				<div class="nav system-nav">
 				    <p>System</p>
 				    <a class="{% if request.endpoint == 'dashboard.index' %}active{% endif %}" href="{{ url_for('dashboard.index') }}"><i class="fas fa-gauge-high"></i> System Overview</a>
+					<a href=""><i class="fas fa-bell"></i> Notifications</a>		
 				</div>
 				
 				<div class="nav access-nav">
@@ -80,7 +81,11 @@
     				<p>{{ title_description }}</p>
     			</div>
     			<div class="right">
-    				
+                <div class="split">
+                    <p><i class="fas fa-circle"></i> Security Monitoring Active</p>
+    				<div id="current-date" class="date"></div>
+                </div>
+                    <div id="current-time" class="time"></div>
     			</div>
 			</div>
 			{% block content %}

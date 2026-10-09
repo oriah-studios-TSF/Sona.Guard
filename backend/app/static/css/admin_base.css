@@ -44,7 +44,7 @@ body {
 }
 
 .sidebar-header img {
-    width: 120px;
+    width: 150px;
     height: auto;
 }
 
@@ -52,7 +52,7 @@ body {
     padding: 15px 15px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 .sidebar-content a {
@@ -60,6 +60,8 @@ body {
     text-decoration: none;
     font-size: 10pt;
     margin-left: 10px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .sidebar-content .nav {
@@ -141,6 +143,31 @@ body {
     padding: 20px 15px;
 }
 
+.main-content-header .right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: right;
+}
+
+.main-content-header .right p  {
+ font-size: 9pt; 
+
+}
+
+.main-content-header .right p i {
+    color: greenyellow;
+}
+
+.date {
+    font-size: 10pt;
+    color: lightslategray;
+}
+
+.time {
+    font-size: 25pt;
+}
+
 .main-content-header h1 {
     font-size: 15pt;
     font-weight: 500;
@@ -185,7 +212,8 @@ body {
 }
 
 .nav a.active {
-    color: white;
+    background-color: white;
+    color: #27313b;
 }
 
 

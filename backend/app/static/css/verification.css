@@ -1,0 +1,73 @@
+.section {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.verification-card {
+    border: 2px solid lightslategray;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    padding: 20px 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.verification-header h1 {
+    font-size: 18pt;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.verification-header p {
+    font-size: 10pt;
+}
+
+.search-person-form {
+    margin-top: 15px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group .row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid lightslategray;
+    padding: 10px 15px;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.form-group .row i {
+    font-size: 15pt;
+    color: lightslategray;
+}
+
+.form-group input {
+   background: none;
+   border: none;
+   outline: none;
+   color: white;
+   font-size: 11pt;
+   text-transform: uppercase;
+   letter-spacing: 0.8px;
+   width: 100%;
+
+}
+
+.search-person-form button {
+    background-color: lightslategray;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 12.5px 20px;
+    cursor: pointer;
+}
+
+.search-person-form button:hover {
+    background-color: #0438ff;
+}

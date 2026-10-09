@@ -4,11 +4,28 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sona.Guard - {{ title }}</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/verification.css') }}">
 </head>
 <body>
     {% extends "admin_base.html" %}
     {% block content %}
-        
+        <section class="section verification">
+            <div class="verification-card">
+                <div class="verification-header">
+                    <h1><i class="fas fa-search"></i> Identity Verification</h1>
+                    <p>Search for an employee and verify their access credentials.</p>
+                </div>
+                <form action="" class="search-person-form">
+                    <div class="form-group">
+                        <div class="row">
+                            <i class="fas fa-id-card"></i>
+                            <input type="text" id="employee-id" name="employee_id" maxlength="6" placeholder="eg. EMP001" autocomplete="off" required>
+                        </div>
+                        <button type="submit" id="search-person-button"><i class="fa fa-search"></i> Search Employee</button>
+                    </div>
+                </form>
+            </div>
+        </section>
     {% endblock %}
 </body>
 </html>

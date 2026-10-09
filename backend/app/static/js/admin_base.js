@@ -63,3 +63,24 @@ if (logoutButton) {
         }
     });
 }
+
+function updateDateTime() {
+    const now = new Date();
+
+    document.getElementById('current-date').textContent =
+        now.toLocaleDateString('en-ZA', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+
+    document.getElementById('current-time').textContent =
+        now.toLocaleTimeString('en-ZA', {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+}
+
+updateDateTime();
+setInterval(updateDateTime, 1000);
