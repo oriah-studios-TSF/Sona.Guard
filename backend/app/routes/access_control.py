@@ -39,7 +39,12 @@ def get_person(employee_id):
             'email': person.email,
             'phone_number': person.phone_number,
             'photo': person.photo,
-            'is_active': person.is_active
+            'is_active': person.is_active,
+            'nationality': person.nationality,
+            'department': person.department,
+            'job_title': person.job_title,
+            'workplace': person.workplace,
+            'credential_expires_at': person.credential_expires_at.isoformat() if person.credential_expires_at else None,
         }
     }), 200
 

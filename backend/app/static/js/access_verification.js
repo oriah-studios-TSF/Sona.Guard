@@ -33,17 +33,17 @@ personSearchForm.addEventListener('submit', async function (event) {
         const person = data.person;
 
         document.getElementById('person-name').textContent = person.full_name;
-        document.getElementById('person-role').textContent = person.role || 'Not Provided';
+        document.getElementById('person-role').textContent = person.job_title || 'Not Provided';
         document.getElementById('person-job-title').textContent = person.job_title || 'Not Provided';
         document.getElementById('person-employee-id').textContent = person.employee_id;
         document.getElementById('person-email').textContent = person.email || 'Not Provided';
         document.getElementById('person-phone').textContent = person.phone_number || 'Not Provided';
         document.getElementById('person-nationality').textContent = person.nationality || 'Not Provided'
-        document.getElementById('person-department-allocated').textContent = person.department_allocated || 'Not Provided';
+        document.getElementById('person-department-allocated').textContent = person.department || 'Not Provided';
         document.getElementById('person-department').textContent = person.department || 'Not Provided';
         document.getElementById('person-access-level').textContent = person.access_level || 'Not Provided';
-        document.getElementById('person-access-expiry-date').textContent = person.access_expiry_date || 'Not Provided';
-        document.getElementById('person-location').textContent = person.location || 'Not Provided';
+        document.getElementById('person-access-expiry-date').textContent = person.credential_expires_at ? new Date(person.credential_expires_at).toLocaleDateString() : 'Not Provided';
+        document.getElementById('person-location').textContent = person.workplace || 'Not Provided';
         document.getElementById('person-last-verified').textContent = person.last_verified || 'Not Provided';
         document.getElementById('person-status').textContent = person.is_active ? 'Active' : 'Inactive';
 
