@@ -13,8 +13,13 @@ class Person(db.Model):
     phone_number = db.Column(db.String(30), unique=True, nullable=False)
     photo = db.Column(db.String(255), nullable=True)
     is_active = db.Column(db.Boolean, nullable=False, default=True)
+    nationality = db.Column(db.String(80), nullable=True)
+    department = db.Column(db.String(120), nullable=True)
+    job_title = db.Column(db.String(120), nullable=True)
+    workplace = db.Column(db.String(150), nullable=True)
+    credential_expires_at = db.Column(db.DateTime(timezone=True), nullable=True)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc))
-    updated_by = db.Column(db.DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+    updated_at = db.Column(db.DateTime(timezone=True), nullable=True, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     
     
