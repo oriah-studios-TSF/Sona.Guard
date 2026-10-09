@@ -15,7 +15,7 @@
                     <h1><i class="fas fa-search"></i> Identity Verification</h1>
                     <p>Search for an employee and verify their access credentials.</p>
                 </div>
-                <form action="" class="search-person-form">
+                <form id="search-person-form" action="" class="search-person-form">
                     <div class="form-group">
                         <div class="row">
                             <i class="fas fa-id-card"></i>
@@ -23,9 +23,76 @@
                         </div>
                         <button type="submit" id="search-person-button"><i class="fa fa-search"></i> Search Employee</button>
                     </div>
+                    
+                    <p style="margin-top: 10px;" id="search-message" role="status"></p>
+                    
                 </form>
             </div>
+
         </section>
+
+
+        <div class="section verification-profile">
+            <div id="personal-details" class="verification-profile-card" style="display: none;">
+                <div class="profile-header">
+                    <div class="left">
+                        <div class="user-image">
+                            <img src="{{ url_for('static', filename='images/app_assets/login-background2.jpg') }}" alt="">
+                        </div>
+                        <div class="user-information">
+                            <p class="full-name" id="person-name"></p>
+                            <p class="role" class="fas fa-user-tie"></i> <span id="person-role"></span></p>
+                            <br>
+                            <div class="add-on-info">
+                                <p class="department"><i class="fas fa-building"></i> <span id="person-department-allocated"></span></p>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> <span id="person-location"></span></p>
+                            </div>
+                            <p class="last-verified"><i class="fas fa-clock"></i> <span id="person-last-verified"></span></p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <p class="activeness"><i class="fas fa-circle"></i> <span id="person-status"></span></p>
+                    </div>
+                </div>
+                <div class="user-information-depth">
+                    <div class="left">
+                        <div class="left-information">
+                            <p><i class="fas fa-id-card"></i> Employee ID</p>
+                            <p><i class="fa fa-envelope"></i> Email</p>
+                            <p><i class="fa fa-phone"></i> Phone</p>
+                            <p><i class="fas fa-flag"></i> Nationality</p>
+                        </div>
+                        <div class="right-information">
+                            <p id="person-employee-id"></p>
+                            <p id="person-email"></p>
+                            <p id="person-phone"></p>
+                            <p id="person-nationality"></p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="left-information">
+                            <p><i class="fas fa-building"></i> Department</p>
+                            <p><i class="fa fa-briefcase"></i> Job Title</p>
+                            <p><i class="fa fa-lock"></i> Access Level</p>
+                            <p><i class="fas fa-calendar-alt"></i> Credential Expiry Date</p>
+                        </div>
+                        <div class="right-information">
+                            <p id="person-department"></p>
+                            <p id="person-job-title"></p>
+                            <p id="person-access-level"></p>
+                            <p id="person-access-expiry-date"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="verify-access-button"><i class="fas fa-lock"></i> Verify Access</button>
+                    <button><i class="fas fa-clock"></i> View Access History</button>
+                    <button><i class="fas fa-refresh"></i> Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ url_for('static', filename='js/access_verification.js') }}"></script>
     {% endblock %}
 </body>
 </html>

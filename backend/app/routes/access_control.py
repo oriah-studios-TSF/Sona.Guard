@@ -19,8 +19,9 @@ def verification():
 @access_control_bp.route('/person/<employee_id>', methods=['GET'])
 @login_required
 def get_person(employee_id):
+    
     person = Person.query.filter_by(
-        employee_id=employee_id
+        employee_id=employee_id.strip().upper()
     ).first()
 
     if not person:

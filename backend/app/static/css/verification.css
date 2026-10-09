@@ -3,17 +3,16 @@
     margin-right: 15px;
 }
 
-.verification-card {
+.verification-card, .verification-profile-card {
     border: 2px solid lightslategray;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    padding: 20px 10px;
+    padding: 20px 20px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
 }
 
 .verification-header h1 {
-    font-size: 18pt;
+    font-size: 15pt;
     font-weight: 500;
     margin-bottom: 5px;
 }
@@ -43,7 +42,7 @@
 }
 
 .form-group .row i {
-    font-size: 15pt;
+    font-size: 12pt;
     color: lightslategray;
 }
 
@@ -70,4 +69,123 @@
 
 .search-person-form button:hover {
     background-color: #0438ff;
+}
+
+.verification-profile {
+    margin-top: 20px;
+}
+
+.profile-header .user-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-header .left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.full-name {
+    font-size: 18pt;
+    margin-bottom: 5px;
+}
+
+.role {
+    font-size: 12pt;
+    color: lightslategray;
+}
+
+.add-on-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 11pt;
+    color: lightslategray;
+}
+
+.activeness {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.activeness i {
+    color: greenyellow;
+    font-size: 9pt;
+}
+
+.user-information-depth {
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-top: 1px solid lightslategray;
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    font-size: 11pt;
+}
+
+.user-information-depth .left {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-information-depth .right {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left-information p, .right-information p {
+    margin-bottom: 15px;
+}
+
+.last-verified {
+    margin-top: 10px;
+    font-size: 10pt;
+}
+
+.left-information p {
+    display: flex;
+    gap: 10px;
+    color: lightslategray;
+}
+
+.buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.buttons button {
+    padding: 15px 25px;
+    border: none;
+    background-color: lightslategray;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.verify-access-button {
+    background-color: #0438ff !important;
+}
+
+.buttons button:hover {
+    background-color: #0438ff;
+}
+
+#search-message {
+    font-size: 10pt;
 }
