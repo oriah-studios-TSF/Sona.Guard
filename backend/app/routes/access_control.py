@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, request, render_template
 from flask_login import current_user, login_required
 
-from app.models import Resident
+from app.models import Resident, Entrance, Property, AccessAttempt
 from app.services.access_control import verify_access
+from app.extensions import db
 
 # The access_control blueprint manages checkpoint interfaces and gate verification APIs.
 access_control_bp = Blueprint('access_control', __name__, url_prefix='/access')
@@ -39,6 +40,53 @@ def get_resident(resident_code):
             'icon': '<i class="fa fa-triangle-exclamation-mark"></i>'
         }), 404
 
+    # Get the property where the resident is registered. This is used to display the property name on the guard's screen.
+    # This is done by querying the Property table using the property_id from the resident record.
+    property_record = db.session.get(Property, resident.property_id)
+
+    # Read the entrance selected on the verification page
+    entrance_id = request.args.get('entrance_id', type=int)
+
+    # If no entrance is selected, return an HTTP 400 Bad Request error response.
+    # This is done to ensure that the guard selects an entrance before retrieving resident details.
+    if not entrance_id:
+        return jsonify({
+            'success': False,
+            'message': 'Please select an entrance before retrieving resident details.',
+            'icon': '<i class="fa fa-triangle-exclamation-mark"></i>'
+        }), 400
+
+    entrance = db.session.get(Entrance, entrance_id)
+
+    # If no entrance matches the provided entrance_id, return an HTTP 404 Not Found error response.
+    # This is done to ensure that the guard selects a valid entrance before retrieving resident details.
+    if not entrance:
+        return jsonify({
+            'success': False,
+            'message': 'The selected entrance could not be found.',
+            'icon': '<i class="fa fa-triangle-exclamation-mark"></i>'
+        }), 404
+
+    # Check if this resident can be verified at this entrance
+    # This is done to ensure that the guard does not verify a resident at an entrance that is not assigned to them.
+    if not resident.is_active:
+        eligibility_reason = 'Resident is inactive.'
+    elif not property_record or not property_record.is_active:
+        eligibility_reason = 'Property is inactive or unavailable.'
+    elif not entrance.is_active:
+        eligibility_reason = 'Entrance is inactive.'
+    elif entrance.property_id != resident.property_id:
+        eligibility_reason = 'Resident belongs to a different property.'
+    else:
+        eligibility_reason = 'Eligible for verification.'
+
+    eligible = eligibility_reason == 'Eligible for verification.'
+
+    # Find the most recent access attempt for this resident
+    # This is done to ensure that the guard does not verify a resident who has already been verified.
+    last_attempt = AccessAttempt.query.filter_by(resident_id=resident.id).order_by(AccessAttempt.created_at.desc()).first()
+
+
     # Data Serialization:
     # Convert the SQLAlchemy model attributes into a plain Python dictionary suitable for JSON transmission.
     return jsonify({
@@ -53,7 +101,28 @@ def get_resident(resident_code):
             'property_id': resident.property_id,
             'is_active': resident.is_active,
             'status': 'Active' if resident.is_active else 'Inactive',
-        }
+        },
+        'property': {
+            'id': property_record.id if property_record else None,
+            'name': property_record.name if property_record else 'Unavailable',
+            'address': property_record.address if property_record else 'None',
+            'is_active': property_record.is_active if property_record else False,
+            'status': 'Active' if property_record and property_record.is_active else 'Inactive or Unavailable'
+        },
+        'entrance': {
+            'id': entrance.id,
+            'name': entrance.name,
+            'is_active': entrance.is_active,
+            'status': 'Active' if entrance.is_active else 'Inactive or Unavailable'
+        },
+        'eligibility': {
+            'is_eligible': eligible,
+            'reason': eligibility_reason,
+        },
+        'last_access_attempt': {
+            'result': last_attempt.result,
+            'created_at': (last_attempt.created_at.isoformat() if last_attempt else 'Never'),
+        } if last_attempt else None
     }), 200
 
 
@@ -104,3 +173,19 @@ def verify():
         'access_attempt_id': result['access_attempt_id']
     }), 200
 
+@access_control_bp.route('/entrances', methods=['GET'])
+@login_required
+def get_entrances():
+    entrances = Entrance.query.filter_by(is_active=True).order_by(Entrance.name.asc()).all()
+    return jsonify({
+        'success': True,
+        'entrances': [
+            {
+                'id': entrance.id,
+                'name': entrance.name,
+                'entrance_code': entrance.entrance_code,
+                'propert_id': entrance.property_id
+            }
+            for entrance in entrances
+        ]
+    }), 200
