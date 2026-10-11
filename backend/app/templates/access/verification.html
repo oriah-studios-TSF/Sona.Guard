@@ -11,83 +11,108 @@
     {% block content %}
         <section class="section verification">
             <div class="verification-card">
-                <div class="verification-header">
-                    <h1><i class="fas fa-search"></i> Identity Verification</h1>
-                    <p>Search for an employee and verify their access credentials.</p>
-                </div>
-                <form id="search-person-form" action="" class="search-person-form">
-                    <div class="form-group">
-                        <div class="row">
-                            <i class="fas fa-id-card"></i>
-                            <input type="text" id="employee-id" name="employee_id" maxlength="6" placeholder="eg. EMP001" autocomplete="off" required>
-                        </div>
-                        <button type="submit" id="search-person-button"><i class="fa fa-search"></i> Search Employee</button>
+                <div class="left-col">
+                    <div class="verification-header">
+                        <h1><i class="fas fa-search"></i> Resident Verification</h1>
+                        <p>Search for a resident and confirm their access authorization.</p>
                     </div>
-                    
-                    <p style="margin-top: 10px;" id="search-message" role="status"></p>
-                    
-                </form>
-            </div>
+                    <form id="search-person-form" action="" class="search-person-form">
+                        <div class="form-group">
+                            <div class="row">
+                                <i class="fas fa-id-card"></i>
+                                <input type="text" id="resident-code-input" name="resident_code" maxlength="12" placeholder="Enter resident code or reference code eg. SONA-RES-001" autocomplete="off" required>
+                            </div>
+                            <button type="submit" id="search-person-button"><i class="fa fa-search"></i> Retrieve Credentials</button>
+                        </div>
+                        
+                        <p style="margin-top: 10px;" id="search-message" role="status"></p>
+                        
+                    </form>
+                </div>
+                <div class="right-col">
+                    <div class="text">
+                        <h3><i class="fas fa-location-dot"></i> Access Point Selection</h3>
+                        <p>Select the access point assigned to your monitoring station.</p>
+                        <select class="entrance-selector" id="entrance-selector" name="entrance_id" required>
+                            <option value=""><i class="fas fa-spinner fa-spin"></i> Loading access points...</option>
+                        </select>
+                    </div>
+                </div>
+                </div>
 
         </section>
 
+        <div id="no-results-found" class="no-results-found" style="display: none;">
+            <i class="fas fa-triangle-exclamation"></i>
+            <div class="text">
+                <h1>Resident verification failed.</h1>
+                <p>No matching resident record was found.</p>
+            </div>
+        </div>
+
+        <div id="server-error" class="server-error" style="display: none;">
+            <i class="fas fa-circle-info"></i>
+            <div class="text">
+                <h1>Verification service unavailable.</h1>
+                <p>An unexpected error occurred while retrieving resident information.</p>
+            </div>
+        </div>
 
         <div class="section verification-profile">
             <div id="personal-details" class="verification-profile-card" style="display: none;">
+                <div id="success-result" class="search-result-header">
+                    <i class="fas fa-circle-check"></i>
+                    <div class="text">
+                        <h1>Resident record retrieved successfully.</h1>
+                        <p>Review the resident's details below before continuing with the verification process.</p>
+                    </div>
+                </div>
+
                 <div class="profile-header">
-                    <div class="left">
-                        <div class="user-image">
-                            <img src="{{ url_for('static', filename='images/app_assets/login-background2.jpg') }}" alt="">
-                        </div>
-                        <div class="user-information">
-                            <p class="full-name" id="person-name"></p>
-                            <p class="role" class="fas fa-user-tie"></i> <span id="person-role"></span></p>
-                            <br>
-                            <div class="add-on-info">
-                                <p class="department"><i class="fas fa-building"></i> <span id="person-department-allocated"></span></p>
-                                <p class="location"><i class="fas fa-map-marker-alt"></i> <span id="person-location"></span></p>
-                            </div>
-                            <p class="last-verified"><i class="fas fa-clock"></i> <span id="person-last-verified"></span></p>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <p class="activeness"><i class="fas fa-circle"></i> <span id="person-status"></span></p>
+                    <img src="{{ url_for('static', filename='images/app_assets/login-background2.jpg') }}" alt="Profile Image" class="profile-image">
+                    <div class="profile-info">
+                        <h1 class="full-name" id="profile-full-name"></h1>
+                        <p class="profile-resident-code">Resident Code: <span id="profile-resident-code"></span></p>
+                        <p class="status"><i class="fas fa-circle-check"></i> <span id="profile-status"></span></p>
                     </div>
                 </div>
-                <div class="user-information-depth">
-                    <div class="left">
-                        <div class="left-information">
-                            <p><i class="fas fa-id-card"></i> Employee ID</p>
-                            <p><i class="fa fa-envelope"></i> Email</p>
-                            <p><i class="fa fa-phone"></i> Phone</p>
-                            <p><i class="fas fa-flag"></i> Nationality</p>
-                        </div>
-                        <div class="right-information">
-                            <p id="person-employee-id"></p>
-                            <p id="person-email"></p>
-                            <p id="person-phone"></p>
-                            <p id="person-nationality"></p>
+
+                <div class="profile-info-depth">
+                    <div class="resident-info">
+                        <h3><i class="fas fa-user"></i> Resident Information</h3>
+                        <div class="info">
+                            <p>Full Name: <span id="resident-full-name"></span></p>
+                            <p>Resident Code: <span id="resident-code"></span></p>
+                            <p>Unit Number: <span id="unit-number"></span></p>
+                            <p>Phone Number: <span id="phone-number"></span></p>
+                            <p>Email Address: <span id="email-address"></span></p>
                         </div>
                     </div>
-                    <div class="right">
-                        <div class="left-information">
-                            <p><i class="fas fa-building"></i> Department</p>
-                            <p><i class="fa fa-briefcase"></i> Job Title</p>
-                            <p><i class="fa fa-lock"></i> Access Level</p>
-                            <p><i class="fas fa-calendar-alt"></i> Credential Expiry Date</p>
+
+                    <div class="property-info">
+                        <h3><i class="fas fa-house-user"></i> Residence Information</h3>
+                        <div class="info">
+                            <p>Estate Name: <span id="estate-name"</span></p>
+                            <p>Estate Address: <span id="estate-address"</span></p>
+                            <p>Unit Number: <span id="resident-unit-number"></span></p>
+                            <p>Residence Address: <span id="residence-address"></span></p>
                         </div>
-                        <div class="right-information">
-                            <p id="person-department"></p>
-                            <p id="person-job-title"></p>
-                            <p id="person-access-level"></p>
-                            <p id="person-access-expiry-date"></p>
+                    </div>
+
+                    <div class="access-info">
+                        <h3><i class="fas fa-key"></i> Access Status</h3>
+                        <div class="info">
+                            <p>Resident Access Status: <span id="access-status"></span></p>
+                            <p>Property Status: <span id="property-status"></span></p>
+                            <p>Entrance Status: <span id="entrance-status"></span></p>
+                            <p>Last Access Attempt: <span id="last-access-attempt"></span></p>
                         </div>
                     </div>
                 </div>
+
                 <div class="buttons">
-                    <button class="verify-access-button"><i class="fas fa-lock"></i> Verify Access</button>
-                    <button><i class="fas fa-clock"></i> View Access History</button>
-                    <button><i class="fas fa-refresh"></i> Reset</button>
+                    <button id="verify-access-btn" class="verify-access-btn"><i class="fas fa-circle-check"></i> Verify Resident Access <i class="fas fa-arrow-right"></i></button>
+                    <button> <i class="fas fa-history"></i> View Access History</button>
                 </div>
             </div>
         </div>

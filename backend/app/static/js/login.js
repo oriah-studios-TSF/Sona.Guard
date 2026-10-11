@@ -1,10 +1,10 @@
 const loginForm = document.getElementById('login-form');
 const loginButton = document.getElementById('login-button');
 
-const employeeIdInput = document.getElementById('employee-id');
+const staffCodeInput = document.getElementById('staff-code');
 const passwordInput = document.getElementById('password');
 
-const employeeIdError = document.getElementById('employee-id-error');
+const staffCodeError = document.getElementById('staff-code-error');
 const passwordError = document.getElementById('password-error');
 
 const toast = document.getElementById('toast');
@@ -41,20 +41,20 @@ if (serverToastData) {
 loginForm.addEventListener('submit', async function (event) {
     event.preventDefault();
 
-    const employeeId = employeeIdInput.value.trim();
+    const staffCode = staffCodeInput.value.trim();
     const password = passwordInput.value;
 
-    employeeIdError.innerHTML = '';
-    employeeIdError.style.display = 'none';
+    staffCodeError.innerHTML = '';
+    staffCodeError.style.display = 'none';
 
     passwordError.innerHTML = '';
     passwordError.style.display = 'none';
 
     let isValid = true;
 
-    if (!employeeId) {
-        employeeIdError.innerHTML = '<i class="fas fa-triangle-exclamation"></i>  Employee ID is required';
-        employeeIdError.style.display = 'block';
+    if (!staffCode) {
+        staffCodeError.innerHTML = '<i class="fas fa-triangle-exclamation"></i>  Staff code is required';
+        staffCodeError.style.display = 'block';
         isValid = false;
     }
 
@@ -80,7 +80,7 @@ loginForm.addEventListener('submit', async function (event) {
             },
                 
             body: JSON.stringify({
-                employee_id: employeeId,
+                staff_code: staffCode,
                 password: password
             })
         });

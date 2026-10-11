@@ -3,12 +3,62 @@
     margin-right: 15px;
 }
 
-.verification-card, .verification-profile-card {
+.verification-card {
     border: 2px solid lightslategray;
-    padding: 20px 20px;
+    padding: 15px 20px;
     border-radius: 10px;
     display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.verification-card .right-col {
+    display: flex;
     flex-direction: column;
+    gap: 5px;
+    background-color: white;
+    color: #27313b;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 385px;
+    width: 100%;
+    height: fit-content;
+}
+
+.verification-card .left-col {
+    max-width: calc(100% - 400px);
+    width: 100%;
+}
+
+.right-col select {
+    font-size: 10pt;
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: #27313b;
+    color: lightslategray;
+    border: none;
+    cursor: pointer;
+}
+
+.right-col select:hover {
+    color: white;
+    background-color: #0438ff;
+}
+
+.verification-card .right-col p {
+    font-size: 9pt;
+}
+
+.verification-card .right-col h3 {
+    font-size: 11pt;
+}
+
+.verification-card .right-col .text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .verification-header h1 {
@@ -29,6 +79,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .form-group .row {
@@ -38,7 +89,8 @@
     border: 2px solid lightslategray;
     padding: 10px 15px;
     border-radius: 10px;
-    width: 50%;
+    max-width: 500px;
+    width: 100%;
 }
 
 .form-group .row i {
@@ -51,141 +103,197 @@
    border: none;
    outline: none;
    color: white;
-   font-size: 11pt;
+   font-size: 10pt;
    text-transform: uppercase;
    letter-spacing: 0.8px;
    width: 100%;
+}
 
+
+.form-group input::placeholder {
+    text-transform: none !important;
+    letter-spacing: none !important;
 }
 
 .search-person-form button {
-    background-color: lightslategray;
-    color: white;
+    background-color: white;
+    color: #27313b;
     border-radius: 10px;
     border: none;
-    padding: 12.5px 20px;
+    padding: 11px 20px;
     cursor: pointer;
+    width: 200px
 }
 
 .search-person-form button:hover {
     background-color: #0438ff;
+    color: white;
 }
 
 .verification-profile {
-    margin-top: 20px;
-}
-
-.profile-header .user-image img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.profile-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.profile-header .left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.full-name {
-    font-size: 18pt;
-    margin-bottom: 5px;
-}
-
-.role {
-    font-size: 12pt;
-    color: lightslategray;
-}
-
-.add-on-info {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 11pt;
-    color: lightslategray;
-}
-
-.activeness {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.activeness i {
-    color: greenyellow;
-    font-size: 9pt;
-}
-
-.user-information-depth {
-    margin-top: 20px;
-    padding-top: 20px;
-    padding-bottom: 10px;
-    border-top: 1px solid lightslategray;
-    display: flex;
-    align-items: center;
-    gap: 100px;
-    font-size: 11pt;
-}
-
-.user-information-depth .left {
-    width: 40%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.user-information-depth .right {
-    width: 40%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.left-information p, .right-information p {
-    margin-bottom: 15px;
-}
-
-.last-verified {
     margin-top: 10px;
-    font-size: 10pt;
-}
-
-.left-information p {
-    display: flex;
-    gap: 10px;
-    color: lightslategray;
-}
-
-.buttons {
-    margin-top: 10px;
-    display: flex;
-    gap: 10px;
-}
-
-.buttons button {
-    padding: 15px 25px;
-    border: none;
-    background-color: lightslategray;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.verify-access-button {
-    background-color: #0438ff !important;
-}
-
-.buttons button:hover {
-    background-color: #0438ff;
 }
 
 #search-message {
     font-size: 10pt;
 }
+
+.search-result-header {
+    background-color: greenyellow;
+    color: #27313b;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.server-error {
+    background-color: #f59f00;
+    color: #27313b;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 15px;
+}
+
+.no-results-found {
+    color: #27313b;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #dc3545;
+    margin: 10px 15px;
+}
+
+.search-result-header i, .server-error i, .no-results-found i {
+    font-size: 30pt;
+}
+
+.search-result-header .text h1, .server-error .text h1, .no-results-found .text h1 {
+    font-size: 15pt;
+    font-weight: 600;
+}
+
+.search-result-header .text p, .server-error .text p, .no-results-found .text p {
+    font-size: 10pt;
+}
+
+.verification-profile-card {
+    border: 2px solid lightslategray;
+    padding: 10px 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.profile-header img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.status {
+    font-size: 10pt;
+    color: #27313b;
+    background-color: greenyellow;
+    padding: 10px;
+    border-radius: 50px;
+    margin-top: 5px;
+    width: fit-content;
+}
+
+.inactive {
+    background-color: red;
+}
+
+.profile-info-depth {
+    display: flex;
+    align-items: self-start;
+    padding: 10px;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.profile-info-depth h3 {
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+.resident-info , .property-info, .access-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.resident-info div, .property-info div, .access-info div{
+    width: 350px;
+    border-top: 1px solid lightslategray;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.resident-info .info, .property-info .info, .access-info .info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.resident-info .info p, .property-info .info p, .access-info .info p {
+    font-size: 10pt;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: lightslategray;
+}
+
+.resident-info .info span, .property-info .info span, .access-info .info span {
+    font-size: 10pt;
+    font-weight: 400;
+    color: white;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.buttons button {
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.buttons button:hover {
+    background-color: #0438ff;
+    color: white;
+}
+
+
+
+
+

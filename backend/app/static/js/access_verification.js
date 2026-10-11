@@ -1,57 +1,64 @@
 const personSearchForm = document.getElementById('search-person-form')
-const employeeIdInput = document.getElementById('employee-id')
+const residentCodeInput = document.getElementById('resident-code-input')
 const SearchPersonButton = document.getElementById('search-person-button')
 const searchMessage = document.getElementById('search-message')
 const personDetails = document.getElementById('personal-details')
+const serverError = document.getElementById('server-error')
+const noResultsFound = document.getElementById('no-results-found')
+
 
 personSearchForm.addEventListener('submit', async function (event) {
     event.preventDefault();
 
-    const employeeId = employeeIdInput.value.trim().toUpperCase();
+    const residentCode = residentCodeInput.value.trim().toUpperCase();
 
-    if (!employeeId) {
-        searchMessage.textContent = 'Please enter an employee ID.'
+    if (!residentCode) {
+        searchMessage.textContent = 'Please provide a resident identifier for verification.'
         return;
     }
 
     personDetails.style.display = 'none';
+    noResultsFound.style.display = 'none';
+    serverError.style.display = 'none';
+    
     SearchPersonButton.disabled = true;
     searchMessage.innerHTML = '<i class="fas fa-spinner"></i> Validating access credentials...';
 
     try {
         const response = await fetch(
-            `/access/person/${encodeURIComponent(employeeId)}`
+            `/access/resident/${encodeURIComponent(residentCode)}`
         );
 
         const data = await response.json();
 
         if (!response.ok || !data.success) {
-            searchMessage.textContent = data.message || 'Employee lookup failed.';
+            searchMessage.textContent = data.message || 'Unable to locate resident information.';
+            noResultsFound.style.display = 'flex';
             return;
         }
 
-        const person = data.person;
+        const resident = data.resident;
+        
+        document.getElementById('profile-full-name').textContent = resident.full_name;
+        document.getElementById('profile-resident-code').textContent = resident.resident_code;
+        document.getElementById('profile-status').textContent = resident.status ? 'Active Resident' : 'Inactive Resident';
 
-        document.getElementById('person-name').textContent = person.full_name;
-        document.getElementById('person-role').textContent = person.job_title || 'Not Provided';
-        document.getElementById('person-job-title').textContent = person.job_title || 'Not Provided';
-        document.getElementById('person-employee-id').textContent = person.employee_id;
-        document.getElementById('person-email').textContent = person.email || 'Not Provided';
-        document.getElementById('person-phone').textContent = person.phone_number || 'Not Provided';
-        document.getElementById('person-nationality').textContent = person.nationality || 'Not Provided'
-        document.getElementById('person-department-allocated').textContent = person.department || 'Not Provided';
-        document.getElementById('person-department').textContent = person.department || 'Not Provided';
-        document.getElementById('person-access-level').textContent = person.access_level || 'Not Provided';
-        document.getElementById('person-access-expiry-date').textContent = person.credential_expires_at ? new Date(person.credential_expires_at).toLocaleDateString() : 'Not Provided';
-        document.getElementById('person-location').textContent = person.workplace || 'Not Provided';
-        document.getElementById('person-last-verified').textContent = person.last_verified || 'Not Provided';
-        document.getElementById('person-status').textContent = person.is_active ? 'Active' : 'Inactive';
+        document.getElementById('resident-full-name').textContent = resident.full_name;
+        document.getElementById('resident-code').textContent = resident.resident_code;
+        document.getElementById('unit-number').textContent = resident.unit_number || 'N/A';
+        document.getElementById('email-address').textContent = resident.email || 'N/A';
+        document.getElementById('phone-number').textContent = resident.phone_number || 'N/A';
+        
 
-        searchMessage.innerHTML = '<i class="fas fa-circle-check"></i> Employee found successfully.';
         personDetails.style.display = 'block';
+        noResultsFound.style.display = 'none';
+        searchMessage.textContent = '';
         
     } catch (error) {
-        searchMessage.textContent = 'Unable to connect to the server. Please try again.';
+        console.log('Error fetching resident information: ', error);
+        searchMessage.innerHTML = '<i class="fas fa-triangle-exclamation"></i> Unable to connect to the server. Please try again.';
+        serverError.style.display = 'flex';
+        
     } finally {
         SearchPersonButton.disabled = false;
     }
