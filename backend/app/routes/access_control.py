@@ -184,7 +184,7 @@ def get_entrances():
                 'id': entrance.id,
                 'name': entrance.name,
                 'entrance_code': entrance.entrance_code,
-                'propert_id': entrance.property_id
+                'property_id': entrance.property_id
             }
             for entrance in entrances
         ]
