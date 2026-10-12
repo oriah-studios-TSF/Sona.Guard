@@ -92,7 +92,7 @@ def verify_access(resident_id, entrance_id, user_id=None):
     if not property_record or not property_record.is_active:
         return record_attempt(
             property_id, entrance, resident, user_id,
-            'DENIED', 'Property is inactive or unavailable.'
+            'DENIED', 'Property is unavailable.'
         )
 
     # Step 6: Multi-tenant boundary check.
@@ -108,5 +108,5 @@ def verify_access(resident_id, entrance_id, user_id=None):
     # Grant access and persist the successful verification record.
     return record_attempt(
         property_id, entrance, resident, user_id,
-        'GRANTED', 'Resident verified. Access permitted.'
-    )
+        'GRANTED', 'Resident verified.'
+    )

@@ -18,6 +18,11 @@ class User(UserMixin, db.Model):
     # Primary key: A unique integer assigned to each user row for database indexing and joins.
     id = db.Column(db.Integer, primary_key=True)
 
+    # Foreign key: Links to the `id` column in the `properties` table.
+    # This establishes a relationship between a user and a property.
+    # `nullable=True` allows for users who might not be associated with a property (e.g., admins).
+    property_id = db.Column(db.Integer, db.ForeignKey('properties.id'), nullable=True)
+
     # Identifier used by guards and administrators to log in (e.g. 'SONA-STAFF-001').
     # `unique=True` ensures two users cannot register with the identical staff code.
     staff_code = db.Column(
@@ -62,6 +67,9 @@ class User(UserMixin, db.Model):
         default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc)
     )
+
+    # Relationship for property, because a user belongs to a property
+    property = db.relationship('Property', backref='user', lazy=True)
 
     # Hashes the plaintext password with a random salt using Werkzeug's default algorithm (scrypt/pbkdf2).
     # Salting ensures identical passwords generate completely different hashes, thwarting rainbow table attacks.

@@ -9,6 +9,10 @@
 </head>
 <body>
     <p id="toast" class="toast"></p>
+    <div class="loader" id="loader" style="display: none;">
+        <img src="{{ url_for('static', filename='images/sona.guard_assets/sg_logo.png') }}" alt="">
+        <p><i class="fas fa-spinner fa-spin"></i> <span id="loader-message"></span></p>
+    </div>
     <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -27,33 +31,39 @@
 			</div>
 			<div class="sidebar-content">
 				<div class="nav system-nav">
-				    <p>System</p>
-				    <a class="{% if request.endpoint == 'dashboard.index' %}active{% endif %}" href="{{ url_for('dashboard.index') }}"><i class="fas fa-gauge-high"></i> System Overview</a>
-					<a href=""><i class="fas fa-bell"></i> Notifications</a>		
+				    <p><i class="fas fa-gauge-high"></i> System Overview</p>
+				    <a class="{% if request.endpoint == 'dashboard.index' %}active{% endif %}" href="{{ url_for('dashboard.index') }}">Dashboard</a>
 				</div>
 				
 				<div class="nav access-nav">
-				    <p>Access Control</p>
-				    <a class="{% if request.endpoint == 'access_control.verification' %}active{% endif %}" href="{{ url_for('access_control.verification') }}"><i class="fas fa-user-check"></i> Access Verification</a>
+				    <p><i class="fas fa-key"></i> Access Control</p>
+				    <a class="{% if request.endpoint == 'access_control.verification' %}active{% endif %}" href="{{ url_for('access_control.verification') }}">Access Verification</a>
+					<a href="">Access History</a>
+				</div>
+
+				<div class="nav management-nav">
+				    <p><i class="fas fa-users"></i> People & Residents</p>
+				    <a href="">Residents</a>
+					<a href="">Visitors</a>
+					<a href="">Employees</a>
 				</div>
 				
 				<div class="nav management-nav">
-				    <p>Management</p>
-				    <a href=""><i class="fas fa-users"></i> People</a>
-					<a href=""><i class="fas fa-door-open"></i> Entrances</a>
-				    <a href=""><i class="fas fa-key"></i> Permissions</a>
+				    <p><i class="fas fa-building"></i> Property Management</p>
+				    <a href="">Properties</a>
+					<a href="">Entrances</a>
 				</div>
 				
 				<div class="nav monitoring-nav">
-				    <p>Monitoring</p>
-				    <a href=""><i class="fas fa-list-check"></i> Access Attempts</a>
-					<a href=""><i class="fas fa-file-shield"></i> Audit Logs</a>
+				    <p><i class="fas fa-magnifying-glass"></i> Audit & Monitoring</p>
+				    <a href="">Access Attempts</a>
+					<a href="">Audit Logs</a>
 				</div>
 				
 				<div class="nav admin-nav">
-				    <p>Administration</p>
-				    <a href=""><i class="fas fa-users-gear"></i> Users</a>
-					<a href=""><i class="fas fa-gear"></i> Settings</a>
+				    <p><i class="fas fa-gear"></i> Administration</p>
+				    <a href="">User Accounts</a>
+					<a href="">System Settings</a>
 				</div>
 				
 			</div>

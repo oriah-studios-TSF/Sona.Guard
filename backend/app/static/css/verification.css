@@ -44,7 +44,7 @@
 
 .right-col select:hover {
     color: white;
-    background-color: #0438ff;
+    background-color: lightslategray;
 }
 
 .verification-card .right-col p {
@@ -214,25 +214,52 @@
 }
 
 .status {
+    padding: 10px;
+    border-radius: 50px;
+    margin-top: 5px;
+    width: fit-content;
     font-size: 10pt;
+}
+
+.active-profile-status {
     color: #27313b;
     background-color: greenyellow;
     padding: 10px;
     border-radius: 50px;
     margin-top: 5px;
     width: fit-content;
+    font-size: 10pt;
 }
 
-.inactive {
+.inactive-profile-status {
     background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 50px;
+    margin-top: 5px;
+    width: fit-content;
+    font-size: 10pt;
+}
+
+.eligible i {
+    color: greenyellow !important;
+    
+}
+
+.ineligible i {
+    color: red !important;
+    
 }
 
 .profile-info-depth {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: self-start;
     padding: 10px;
     flex-wrap: wrap;
     gap: 50px;
+    width: 100%;
 }
 
 .profile-info-depth h3 {
@@ -293,6 +320,57 @@
     color: white;
 }
 
+.verified-result {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 485px;
+    border-radius: 10px;
+    padding: 20px;
+    color: #27313b;
+}
+
+.verified-result-success {
+    background-color: greenyellow;
+}
+
+.verified-result-error {
+    background-color: red;
+}
+
+.verification-loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 485px;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+}
+
+.verification-loader h1 {
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+.verification-loader i {
+    font-size: 40pt;
+}
+
+.verification-icon {
+    font-size: 50pt;
+}
+
+.verification-loader p {
+    font-size: 10pt;
+    font-weight: 400;
+}
 
 
 

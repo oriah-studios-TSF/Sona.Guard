@@ -30,6 +30,30 @@ body {
     padding: 15px 15px;
 }
 
+.loader {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    background-color: #27313b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;  
+}
+
+.loader img {
+    width: 100px;
+    height: auto;
+}
+
+.loader p {
+    font-size: 11pt;
+}
+
 .property-name {
     font-size: 11pt;
     font-weight: 500;
@@ -44,7 +68,7 @@ body {
 }
 
 .sidebar-content {
-    padding: 10px 15px;
+    padding: 5px 15px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -62,13 +86,13 @@ body {
 .sidebar-content .nav {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
 }
 
 .sidebar-content .nav p {
     font-size: 9pt;
-    font-weight: 500;
-    letter-spacing: 0.8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .sidebar-content a:hover {

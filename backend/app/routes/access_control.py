@@ -70,17 +70,17 @@ def get_resident(resident_code):
     # Check if this resident can be verified at this entrance
     # This is done to ensure that the guard does not verify a resident at an entrance that is not assigned to them.
     if not resident.is_active:
-        eligibility_reason = 'Resident is inactive.'
+        eligibility_reason = 'Resident is inactive'
     elif not property_record or not property_record.is_active:
-        eligibility_reason = 'Property is inactive or unavailable.'
+        eligibility_reason = 'Property is unavailable'
     elif not entrance.is_active:
-        eligibility_reason = 'Entrance is inactive.'
+        eligibility_reason = 'Entrance is inactive'
     elif entrance.property_id != resident.property_id:
-        eligibility_reason = 'Resident belongs to a different property.'
+        eligibility_reason = 'Non-resident'
     else:
-        eligibility_reason = 'Eligible for verification.'
+        eligibility_reason = 'Eligible for verification'
 
-    eligible = eligibility_reason == 'Eligible for verification.'
+    eligible = eligibility_reason == 'Eligible for verification'
 
     # Find the most recent access attempt for this resident
     # This is done to ensure that the guard does not verify a resident who has already been verified.

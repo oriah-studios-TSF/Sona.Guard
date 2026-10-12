@@ -13,7 +13,7 @@ dashboard_bp = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 def index():
     return render_template(
         'dashboard/index.html',
-        title='System Overview',
+        title='Dashboard',
         title_description='Monitor and manage access across your facility.',
         icon='tachometer-alt'
     )
