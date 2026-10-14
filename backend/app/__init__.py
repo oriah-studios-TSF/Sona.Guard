@@ -4,7 +4,7 @@ from app.config import Config
 from app.extensions import db, csrf, migrate, login_manager, limiter
 from app.models import User
 import app.models
-from app.routes import main_bp, auth_bp, dashboard_bp, access_control_bp
+from app.routes import main_bp, auth_bp, dashboard_bp, access_control_bp, units_bp
 
 # The Application Factory function.
 # In Flask, using a factory function instead of a single global app instance allows us to:
@@ -66,6 +66,7 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(access_control_bp)
+    app.register_blueprint(units_bp)
 
     return app
 

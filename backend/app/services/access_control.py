@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 
 from app.extensions import db
-from app.models import Property, Entrance, Resident, AccessAttempt
+from app.models import Property, Entrance, Resident, AccessAttempt, Unit
 
 
 # Helper function to persist physical access verification outcomes to the database.
@@ -83,6 +83,28 @@ def verify_access(resident_id, entrance_id, user_id=None):
         return record_attempt(
             property_id, entrance, resident, user_id,
             'DENIED', 'Resident is inactive.'
+        )
+
+    # Check whether the resident's assigned unit exists and is active.
+    unit = db.session.get(Unit, resident.unit_id) if resident.unit_id else None
+
+    if not unit:
+        return record_attempt(
+            property_id, entrance, resident, user_id,
+            'DENIED', 'Resident has no valid unit assignment'
+        )
+
+    if not unit.is_active:
+        return record_attempt(
+            property_id, entrance, resident, user_id,
+            'DENIED', 'Resident unit is inactive'
+        )
+
+    # Ensure the unit belongs to the same estate as the resident.
+    if unit.property_id != property_id:
+        return record_attempt(
+            property_id, entrance, resident, user_id,
+            'DENIED', 'Resident unit belongs to a different property'
         )
 
     # Step 5: Check property status.

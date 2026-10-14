@@ -141,5 +141,4 @@ setInterval(updateDateTime, 1000);
 // Everytime the page reloads display loader
 window.addEventListener('beforeunload', function () {
     document.getElementById('loader').style.display = 'flex';
-    loaderMessage.textContent = 'Please wait...';
 });

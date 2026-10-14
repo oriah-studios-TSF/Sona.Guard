@@ -15,4 +15,5 @@ from app.models.entrance import Entrance
 from app.models.access_attempt import AccessAttempt
 from app.models.property import Property
 from app.models.visitor import Visitor
-from app.models.visitor_authorization import VisitorAuthorization
+from app.models.visitor_authorization import VisitorAuthorization
+from app.models.unit import Unit

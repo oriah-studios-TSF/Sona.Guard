@@ -65,7 +65,7 @@ async function loadEntrances() {
 
         // Populate dropdown with active entrance gates (text: name, value: database ID)
         data.entrances.forEach(function (entrance) {
-            const option = new Option(entrance.name, entrance.id)
+            const option = new Option(`${entrance.name} - (${entrance.property_name})`, `${entrance.id}`)
             entranceSelect.add(option)
         });
 

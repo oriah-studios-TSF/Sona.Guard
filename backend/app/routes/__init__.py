@@ -6,6 +6,7 @@ from flask import Blueprint, render_template
 from app.routes.auth import auth_bp
 from app.routes.dashboard import dashboard_bp
 from app.routes.access_control import access_control_bp
+from app.routes.units import units_bp
 
 # The `main_bp` Blueprint manages top-level, general routes that do not require a sub-prefix.
 main_bp = Blueprint('main', __name__)
@@ -15,4 +16,4 @@ main_bp = Blueprint('main', __name__)
 # Serves the initial login page template (`templates/auth/login.html`) to users visiting the application.
 @main_bp.route('/')
 def home():
-    return render_template('auth/login.html')
+    return render_template('auth/login.html')

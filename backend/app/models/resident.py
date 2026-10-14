@@ -23,6 +23,9 @@ class Resident(db.Model):
         nullable=False
     )
 
+    # The specific house or unit where this resident lives
+    unit_id = db.Column(db.Integer,db.ForeignKey('units.id'), nullable=True)
+
     # Unique identifier presented at gate checkpoints (e.g. on an RFID tag, mobile app, or barcode).
     # Guard interfaces query by this code to retrieve resident details quickly.
     resident_code = db.Column(
@@ -61,4 +64,7 @@ class Resident(db.Model):
         default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc)
     )
+
+    # The unit this resident is associated with
+    unit = db.relationship('Unit', back_populates='residents', lazy=True) 
 

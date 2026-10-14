@@ -32,6 +32,25 @@ def get_resident(resident_code):
         resident_code=resident_code.strip().upper()
     ).first()
 
+     # Security officers can only see and retrieve resident records belonging to their assigned properties
+     # Administrators can see resident records across all properties
+    if current_user.role != 'admin':
+        if not current_user.property_id:
+            return jsonify({
+                'success': False,
+                'message': 'The resident could not be retrieved. Check the resident code or contact your supervisor.',
+                'icon': '<i class="fa fa-triangle-exclamation-mark"></i>'
+            }), 403
+
+        
+        if resident.property_id != current_user.property_id:
+            return jsonify({
+                'success': False,
+                'message': 'The resident could not be retrieved. Check the resident code or contact your supervisor.',
+                'icon': '<i class="fa fa-triangle-exclamation-mark"></i>'
+            }), 403
+            
+
     # If no resident matches the provided code, return an HTTP 404 Not Found error response.
     if not resident:
         return jsonify({
@@ -137,6 +156,33 @@ def verify():
     resident_id = data.get('resident_id')
     entrance_id = data.get('entrance_id')
 
+    # Security officers can only see and retrieve resident records belonging to their assigned properties
+    # Administrators can see resident records across all properties
+    if current_user.role != 'admin':
+        if not current_user.property_id:
+            return jsonify({
+                'success': False,
+                'message': 'You are not assigned to any property.',
+                'icon': '<i class="fa fa-triangle-exclamation-mark"></i>'
+            }), 403
+
+        # Check if the resident belongs to the security officer's assigned property
+        resident = db.session.get(Resident, resident_id)
+
+        if not resident or resident.property_id != current_user.property_id:
+            return jsonify({
+                'success': False,
+                'message': 'The resident could not be retrieved. Check the resident code or contact your supervisor.',
+                'icon': '<i class="fa fa-triangle-exclamation-mark"></i>'
+            }), 404
+        
+        if not resident:
+            return jsonify({
+                'success': False,
+                'message': 'The resident could not be retrieved. Check the resident code or contact your supervisor.',
+                'icon': '<i class="fa fa-triangle-exclamation-mark"></i>'
+            }), 404
+
     # Input Validation Step 1: Ensure required parameters are present in the request.
     if not resident_id or not entrance_id:
         return jsonify({
@@ -176,7 +222,29 @@ def verify():
 @access_control_bp.route('/entrances', methods=['GET'])
 @login_required
 def get_entrances():
-    entrances = Entrance.query.filter_by(is_active=True).order_by(Entrance.name.asc()).all()
+    # Query all active entrances
+    query = Entrance.query.join(Property).filter(
+        Entrance.is_active == True,
+        Property.is_active == True
+    )
+
+    # Security officers can only see entrances belonging to their assigned properties
+    # Administrators can see entrances across all properties
+
+    if current_user.role != 'admin':
+        if not current_user.property_id:
+            return jsonify({
+                'success': False,
+                'message': 'Your account is not assigned to a property. Please contact an administrator.'
+            }), 403
+
+         # Filter entrances by the current user's property_id
+        query = query.filter(Entrance.property_id == current_user.property_id)
+
+    entrances = query.order_by(Entrance.name.asc()).all() 
+
+
+     # Return the list of entrances as JSON
     return jsonify({
         'success': True,
         'entrances': [
@@ -184,7 +252,8 @@ def get_entrances():
                 'id': entrance.id,
                 'name': entrance.name,
                 'entrance_code': entrance.entrance_code,
-                'property_id': entrance.property_id
+                'property_id': entrance.property_id,
+                'property_name': entrance.property.name if entrance.property else 'N/A'
             }
             for entrance in entrances
         ]
