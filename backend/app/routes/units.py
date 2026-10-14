@@ -12,7 +12,7 @@ units_bp = Blueprint('units', __name__, url_prefix='/units')
 def index():
     return render_template(
         'units/index.html',
-        title='Units',
+        title='Units / House Management',
         title_description='Manage residential units and house assignments within your estate.',
         icon='house-user'
     )

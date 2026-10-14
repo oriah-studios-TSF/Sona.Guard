@@ -24,11 +24,20 @@
     {% endwith %}
     
     <div class="main-container">
+        {% set is_owner = current_user.role == 'system_owner' %}
+        {% set is_estate_admin = current_user.role == 'estate_admin' %}
+        {% set is_supervisor = current_user.role == 'security_supervisor' %}
+        {% set is_officer = current_user.role == 'security_officer' %}
+        
+        {% set can_manage_estate = is_owner or is_estate_admin %}
+        {% set can_view_estate_management = can_manage_estate or is_supervisor %}
+        {% set can_view_people = can_manage_estate or is_supervisor %}
+
 		<div class="sidebar">
 		    <div class="sidebar-header">
 				<img src="{{ url_for('static', filename='images/sona.guard_assets/sg_logo-full.png') }}" alt="sona.guard logo">
 				<p class="property-name" id="property-name">
-    				{% if current_user.role == 'admin' %}
+    				{% if is_owner %}
                             <i class="fas fa-shield-alt"></i> COMMAND CENTRE
                     {% else %}
                         <i class="fas fa-house"></i> {{ current_user.property.name if current_user.property else 'No Property Assigned' }}
@@ -47,37 +56,46 @@
 					<a href="">Access History</a>
 				</div>
 
-				<div class="nav management-nav">
-				    <p><i class="fas fa-users"></i> People & Residents</p>
-				    <a href="">Residents</a>
-					<a href="">Visitors</a>
-					{% if current_user.role == 'admin' %}
-					    <a href="">Employees</a>
-					{% endif %}
-				</div>
-				
-				<div class="nav management-nav">
-				    <p><i class="fas fa-building"></i> Estate Management</p>
-				    <a href="">Properties</a>
-					<a href="">Entrances</a>
-					<a href="">Units / Houses</a>
-				</div>
+				{% if can_view_people %}
+    				<div class="nav management-nav">
+    				    <p><i class="fas fa-users"></i> People & Residents</p>
+    				    <a href="">Residents</a>
+    					<a href="">Visitors</a>
+                        {% if can_manage_estate %}
+                       	    <a href="">Employees</a>
+                        {% endif %}
+    				</div>
+				{% endif %}
+
+				{% if can_view_estate_management %}
+    				<div class="nav management-nav">
+    				    <p><i class="fas fa-building"></i> Estate Management</p>
+    					{% if is_owner %}
+    					    <a href="">Properties</a>
+    					{% endif %}
+    				    <a href="">Entrances</a>
+    					<a class="{% if request.endpoint == 'units.index' %}active{% endif %}" href="{{ url_for('units.index') }}">Units / Houses</a>
+    				</div>
+				{% endif %}
+
 				
 				<div class="nav monitoring-nav">
 				    <p><i class="fas fa-magnifying-glass"></i> Audit & Monitoring</p>
 				    <a href="">Access Attempts</a>
 								
-					{% if current_user.role == 'admin' %}
+					{% if is_owner or is_estate_admin or is_supervisor %}
 					    <a href="">Audit Logs</a>
 					{% endif %}
 					
 				</div>
 
-				{% if current_user.role == 'admin' %}
+				{% if is_owner or is_estate_admin %}
     				<div class="nav admin-nav">
     				    <p><i class="fas fa-gear"></i> Administration</p>
     				    <a href="">User Accounts</a>
-    					<a href="">System Settings</a>
+                        {% if is_owner %}
+                            <a href="">System Settings</a>
+                        {% endif %}
     				</div>
 				{% endif %}
 				
@@ -89,7 +107,19 @@
 						<i class="fas fa-user"></i>
 						<div class="user-info">
 							<h2>{{ current_user.full_name }}</h2>
-							<p>{{ current_user.role }}</p>
+							<p>
+    				            {% if is_owner %}
+                                    System Owner
+                                {% elif is_estate_admin %}
+                                    Estate Administrator
+                                {% elif is_supervisor %}
+                                    Security Supervisor
+                                {% elif is_officer %}
+                                    Security Officer
+                                {% else %}
+                                    Resident
+                                {% endif %}
+							</p>
 						</div>
 					</div>
 					<div class="right">

@@ -34,7 +34,7 @@ def get_resident(resident_code):
 
      # Security officers can only see and retrieve resident records belonging to their assigned properties
      # Administrators can see resident records across all properties
-    if current_user.role != 'admin':
+    if current_user.role != 'system_owner':
         if not current_user.property_id:
             return jsonify({
                 'success': False,
@@ -158,7 +158,7 @@ def verify():
 
     # Security officers can only see and retrieve resident records belonging to their assigned properties
     # Administrators can see resident records across all properties
-    if current_user.role != 'admin':
+    if current_user.role != 'system_owner':
         if not current_user.property_id:
             return jsonify({
                 'success': False,
@@ -231,7 +231,7 @@ def get_entrances():
     # Security officers can only see entrances belonging to their assigned properties
     # Administrators can see entrances across all properties
 
-    if current_user.role != 'admin':
+    if current_user.role != 'system_owner':
         if not current_user.property_id:
             return jsonify({
                 'success': False,
