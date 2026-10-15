@@ -1,4 +1,4 @@
-from app.services.units import get_units_by_property, get_unit_statistics, get_all_properties, get_all_units
+from app.services.units import get_units_by_property, get_unit_statistics, get_all_properties, get_all_units, create_unit
 from app.models import Unit, Property, Resident
 from flask import Blueprint, render_template, abort
 from flask_login import login_required, current_user

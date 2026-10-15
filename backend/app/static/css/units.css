@@ -305,6 +305,113 @@
     margin-top: 10px;
 }
 
+.create-unit-model {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 600px;
+    background-color: #27313b;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.create-unit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-unit-close-button {
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 20pt;
+    cursor: pointer;
+}
+
+.create-unit-header h1 {
+    color: white;
+    font-size: 20pt;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.create-unit-header p {
+    color: white;
+    font-size: 11pt;
+    font-weight: 300;
+}
+
+.create-unit-body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.create-unit-body .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.create-unit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.create-unit-body .form-group label {
+    color: white;
+    font-size: 11pt;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.create-unit-body .form-group input, .create-unit-body .form-group select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid lightslategray;
+    outline: none;
+    font-size: 10pt;
+    font-weight: 400;
+    background-color: #27313b;
+    color: white;
+}
+
+.create-unit-footer {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.create-unit-footer button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    color: #27313b;
+    background-color: white;
+    font-size: 11pt;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.create-unit-footer button:hover {
+    background-color: #0438ff;
+    color: white;
+}
+
+.cancel-button {
+    background-color: orangered !important;
+    color: white !important;
+}
+
 
 
 
