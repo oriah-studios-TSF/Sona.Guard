@@ -2,3 +2,286 @@
     margin-left: 15px;
     margin-right: 15px;
 }
+
+.section-header h2 {
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+.section-header p {
+    font-size: 10pt;
+    margin-top: 5px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card {
+    flex: 1 1 200px;
+    border: 2px solid lightslategray;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    padding: 20px 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 10pt;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.card-value {
+    font-size: 18pt;
+}
+
+.card-description {
+    font-size: 8pt;
+    margin-top: 15px;
+}
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.filter-bar .input-row {
+    display: flex;
+    gap: 10px;
+    border: 2px solid lightslategray;
+    padding: 8px 10px;
+    border-radius: 10px;
+    flex: 1 1 200px;
+}
+
+.filter-bar .input-row input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 10pt;
+    width: 100%;
+}
+
+.filter-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-bar select {
+    border: 2px solid lightslategray;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 10pt;
+    width: 150px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.filter-bar button {
+    background-color: white;
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-size: 10pt;
+    color: #27313b;
+    border: none;
+    cursor: pointer;
+    width: 120px;
+} 
+
+.filter-bar button:hover {
+    background-color: #0438ff;
+    color: white;
+}
+
+.extras {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.extras .buttons-view {
+    display: flex;
+    gap: 10px;
+}
+
+.extras .buttons-view button {
+    background-color: white;
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-size: 10pt;
+    color: #27313b;
+    border: none;
+    cursor: pointer;
+}
+
+.extras .buttons-view button:hover {
+    background-color: #0438ff;
+    color: white;
+}
+
+.extras .buttons-view button.active {
+    background-color: #0438ff;
+    color: white;
+}
+
+.sort-total-add {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.sort-total-add label {
+    font-size: 11pt;
+    color: lightslategray;
+}
+
+.sort-total-add select {
+    border: 2px solid lightslategray;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 10pt;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.sort-total-add .total-units-view {
+    font-size: 12pt;
+    color: white;
+}
+
+.sort-total-add .add-unit-button {
+    background-color: white;
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-size: 10pt;
+    color: #27313b;
+    border: none;
+    cursor: pointer;
+}
+
+.card-view {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow-y: auto;
+    min-height: 0;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.card-view::-webkit-scrollbar {
+    width: 5px;
+}
+
+.card-view::-webkit-scrollbar-thumb {
+    background-color: lightslategray;
+    border-radius: 5px;
+}
+
+.units-cards-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.unit-card {
+    border-radius: 10px;
+    height: fit-content;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    background-color: #27313b;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 300px;
+    width: 100%;
+    color: black;
+}
+
+.unit-card-header {
+    background-color: white;
+    padding: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.unit-estate {
+    font-size: 12pt;
+    color: lightslategray;
+}
+
+.unit-card-info {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 15px;
+    font-size: 10pt;
+}
+
+.unit-card-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 0 15px;
+    padding-bottom: 20px;
+}
+
+.unit-card-buttons button {
+    border: none;
+    padding: 10px 10px;
+    border-radius: 10px;
+    font-size: 10pt;
+    cursor: pointer;
+    background-color: white;
+}
+
+.unit-card-buttons button:hover {
+    background-color: #0438ff;
+    color: white;
+}
+
+.unit-status {
+    font-size: 10pt;
+    color: #27313b;
+    background-color: greenyellow;
+    padding: 5px 10px;
+    border-radius: 50px;
+    width: fit-content;
+}
+
+.occupation-status {
+    font-size: 10pt;
+    color: #27313b;
+    background-color: #ffc107;
+    padding: 5px 10px;
+    border-radius: 50px;
+    width: fit-content;
+    margin-top: 10px;
+}
+
+
+
+
+
+
+

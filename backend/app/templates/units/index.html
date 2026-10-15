@@ -9,7 +9,93 @@
 <body>
     {% extends "admin_base.html" %}
     {% block content %}
+    <section class="section system-overview">
+        <div class="cards">
+            <div class="card">
+                <span class="card-title">Total Units</span>
+                <span class="card-value">1,260</span>
+                <span class="card-description"><i class="fas fa-arrow-up"></i> 12% from last month.</span>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Occupied Units</span>
+                <span class="card-value">987</span>
+                <span class="card-description"><i class="fas fa-arrow-up"></i> 8% from last month.</span>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Vacant Units</span>
+                <span class="card-value">273</span>
+                <span class="card-description"><i class="fas fa-arrow-down"></i> 4% from last month.</span>
+            </div>
+
+            <div class="card">
+                <span class="card-title">Inactive Units</span>
+                <span class="card-value">12</span>
+                <span class="card-description"><i class="fas fa-circle-info"></i> Units disabled by estate management.</span>
+            </div>
+        </div>
+    </section>
     
+    <div class="filter-bar">
+        <div class="input-row">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search by unit number, resident name or resident code...">
+        </div>
+        <div class="filter-row">
+            <select name="" id="">
+                <option value="">All Properties</option>
+            </select>
+            <select name="" id="">
+                <option value="">All Unit Types</option>
+            </select>
+            <select name="" id="">
+                <option value="">All Status</option>
+            </select>
+            <select name="" id="">
+                <option value="">All Occupancy</option>
+            </select>
+            <button type="button"><i class="fas fa-rotate-right"></i> Reset</button>
+            <button type="button" class="add-unit-button"><i class="fas fa-plus"></i> Add Unit</button>
+        </div>
+    </div>
+
+    <div class="extras">
+        <div class="buttons-view">
+            <button class="active card-view-button"><i class="fas fa-table"></i> Card View</button>
+            <button class="table-view-button"><i class="fas fa-table"></i> Table View</button>
+        </div>
+        <div class="sort-total-add">
+            <div class="input-row">
+                <label for="">Sort By:</label>
+                <select name="" id="">
+                    <option value="">Unit Number (A-Z)</option>
+                </select>
+            </div>
+            <p class="total-units-view">265 Units</p>
+        </div>
+    </div>
+
+    <section class="section card-view">
+        <div class="units-cards-row">
+            <div class="unit-card">
+                <div class="unit-card-header">
+                    <h1>A-101</h1>
+                    <p class="unit-status"> Active</p>
+                </div>
+                <div class="unit-card-info">
+                    <p class="unit-estate"> Sona Gard Estate</p>
+                    <p class="unit-type"><i class="fas fa-building"></i> Apartment</p>
+                    <p class="occupation-status"><i class="fas fa-circle"></i> Vacant</p>
+                </div>
+                <div class="unit-card-buttons">
+                    <button type="" class="view-button"><i class="fas fa-eye"></i> View</button>
+                    <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="more"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
     {% endblock %}
     <script src="{{ url_for('static', filename='js/units.js') }}"></script>
 </body>
