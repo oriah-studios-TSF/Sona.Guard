@@ -1,7 +1,9 @@
-from app.extensions import db
+from flask_login import current_user
 
+from app.extensions import db
 from app.models import Property, Unit
 from app.services.auth import can_access_property
+
 
 # Retrieve all units belonging to a specific property
 def get_units_by_property(property_id):
@@ -19,9 +21,8 @@ def get_units_by_property(property_id):
 # Create a new unit
 def create_unit(property_id, unit_number, unit_type='house'):
     # Only System owners and Estate Administrators can create units
-    from flask_login import current_user
 
-    if not current_user.role not in {'system_owner', 'estate_admin'}:
+    if current_user.role not in {'system_owner', 'estate_admin'}:
         raise PermissionError('You do not have permission to create units.')
 
     if not can_access_property(property_id):
