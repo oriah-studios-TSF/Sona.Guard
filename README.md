@@ -23,6 +23,22 @@ The project is being developed as a practical exploration of backend engineering
 
 Features are being implemented and tested incrementally. The list above describes the current development scope, not a claim that every feature is complete.
 
+## Screenshots
+
+The screenshots below show selected parts of sona.guard as development progresses. Some interfaces are still under development and may not represent completed workflows.
+
+### Staff Login
+![Sona.Guard staff login](docs/screenshots/login-interface.png)
+
+### Resident Verification
+![Sona.Guard resident verification](docs/screenshots/resident-verification.png)
+
+### Residential Unit Management — In Development
+![Sona.Guard unit management](docs/screenshots/unit-management.png)
+
+### Access Granted
+![Sona.Guard access granted confirmation](docs/screenshots/access-granted.png)
+
 ## Database architecture
 
 The database is organised around estates, the people associated with them, and the records needed to verify and review access.
