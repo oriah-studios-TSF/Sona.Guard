@@ -180,7 +180,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
     overflow-y: auto;
@@ -260,7 +259,7 @@
     color: white;
 }
 
-.unit-status {
+.unit-status.active {
     font-size: 10pt;
     color: #27313b;
     background-color: greenyellow;
@@ -269,10 +268,29 @@
     width: fit-content;
 }
 
-.occupation-status {
+.unit-status.inactive {
+    font-size: 10pt;
+    color: #27313b;
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 50px;
+    width: fit-content;
+}
+
+.occupation-status.vacant {
     font-size: 10pt;
     color: #27313b;
     background-color: #ffc107;
+    padding: 5px 10px;
+    border-radius: 50px;
+    width: fit-content;
+    margin-top: 10px;
+}
+
+.occupation-status.occupied {
+    font-size: 10pt;
+    color: #27313b;
+    background-color: greenyellow;
     padding: 5px 10px;
     border-radius: 50px;
     width: fit-content;

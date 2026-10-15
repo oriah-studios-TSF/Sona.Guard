@@ -8,7 +8,7 @@ units_bp = Blueprint('units', __name__, url_prefix='/units')
 
 # Endpoint: GET /units
 # Displays the unit management page for viewing and managing residential units.
-@units_bp.route('/units/')
+@units_bp.route('/')
 @role_required('system_owner', 'estate_admin', 'security_supervisor')
 def index():
 

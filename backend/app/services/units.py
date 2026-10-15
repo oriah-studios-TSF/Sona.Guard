@@ -1,7 +1,7 @@
 from flask_login import current_user
 
 from app.extensions import db
-from app.models import Property, Unit
+from app.models import Property, Unit, Resident
 from app.services.auth import can_access_property
 
 
@@ -75,3 +75,37 @@ def create_unit(property_id, unit_number, unit_type='house'):
     db.session.commit()
 
     return unit
+
+# Calculate unit management statistics for a specific property
+def get_unit_statistics(property_id):
+
+    # Retrieve only units the current user is allowed to access
+    units = get_units_by_property(property_id)
+
+    total_units = len(units)
+    occupied_units = 0
+    vacant_units = 0
+    inactive_units = 0
+
+    for unit in units:
+        # Inactive units arecounted seperately
+        if not unit.is_active:
+            inactive_units += 1
+            continue
+
+        # Check whether the unit has at least one active resident
+        has_active_resident = any(
+            resident.is_active for resident in unit.residents
+        )
+
+        if has_active_resident:
+            occupied_units += 1
+        else:
+            vacant_units += 1
+
+    return {
+        'total_units': total_units,
+        'occupied_units': occupied_units,
+        'vacant_units': vacant_units,
+        'inactive_units': inactive_units
+    }

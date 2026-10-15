@@ -78,22 +78,30 @@
 
     <section class="section card-view">
         <div class="units-cards-row">
-            <div class="unit-card">
-                <div class="unit-card-header">
-                    <h1>A-101</h1>
-                    <p class="unit-status"> Active</p>
+            {% for unit in units %}
+                <div class="unit-card">
+                    <div class="unit-card-header">
+                        <h1>{{ unit.unit_number }}</h1>
+                        <p class="unit-status {{ 'active' if unit.is_active else 'inactive' }}"> {{ 'Active' if unit.is_active else 'Inactive' }}</p>
+                    </div>
+                    <div class="unit-card-info">
+                        <p class="unit-estate">{{ unit.property.name }}</p>
+                        <p class="unit-type"><i class="fas fa-building"></i> {{ unit.unit_type|replace('_', ' ')|title }}</p>
+                        <p class="occupation-status {{ 'occupied' if unit.residents|selectattr('is_active')|list else 'vacant' }}"><i class="fas fa-circle"></i> {{ 'Occupied' if unit.residents|selectattr('is_active')|list else 'Vacant' }}</p>
+                    </div>
+                    <div class="unit-card-buttons">
+                        <button type="" class="view-button"><i class="fas fa-eye"></i> View</button>
+                        {% if current_user.role in ['system_owner', 'estate_admin'] %}
+                            <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
+                        {% endif %}
+                        <button class="more"><i class="fas fa-ellipsis-h"></i></button>
+                    </div>
                 </div>
-                <div class="unit-card-info">
-                    <p class="unit-estate"> Sona Gard Estate</p>
-                    <p class="unit-type"><i class="fas fa-building"></i> Apartment</p>
-                    <p class="occupation-status"><i class="fas fa-circle"></i> Vacant</p>
+            {% else %}
+                <div class="no-units">
+                    <p>No resedential units found for this property.</p>
                 </div>
-                <div class="unit-card-buttons">
-                    <button type="" class="view-button"><i class="fas fa-eye"></i> View</button>
-                    <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
-                    <button class="more"><i class="fas fa-ellipsis-h"></i></button>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </section>
     {% endblock %}
