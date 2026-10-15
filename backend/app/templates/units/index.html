@@ -44,8 +44,11 @@
         </div>
         <div class="filter-row">
             {% if current_user.role == 'system_owner' %}
-                <select name="property" id="propertyFilter">
+                <select name="property_name" id="propertyFilter">
                     <option value="">All Properties</option>
+                    {% for property in properties %}
+                        <option value="{{ property.id }}">{{ property.name }}</option>
+                    {% endfor %}
                 </select>
             {% endif %}
             <select name="unit_type" id="unitTypeFilter">
@@ -88,7 +91,7 @@
     <section class="section card-view">
         <div class="units-cards-row">
             {% for unit in units %}
-                <div class="unit-card" data-unit-type="{{ unit.unit_type}}" data-status="{{ 'active' if unit.is_active else 'inactive' }}" data-occupancy="{{ 'occupied' if unit.residents|selectattr('is_active')|list else 'vacant' }}" data-unit-number="{{ unit.unit_number }}">
+                <div class="unit-card" data-unit-type="{{ unit.unit_type}}" data-status="{{ 'active' if unit.is_active else 'inactive' }}" data-occupancy="{{ 'occupied' if unit.residents|selectattr('is_active')|list else 'vacant' }}" data-unit-number="{{ unit.unit_number }}" data-unit-property="{{ unit.property_id }}">
                     <div class="unit-card-header">
                         <h1>{{ unit.unit_number }}</h1>
                         <p class="unit-status {{ 'active' if unit.is_active else 'inactive' }}"> {{ 'Active' if unit.is_active else 'Inactive' }}</p>

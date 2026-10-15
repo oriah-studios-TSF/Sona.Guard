@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusFilter = document.getElementById('statusFilter');
     const occupancyFilter = document.getElementById('occupancyFilter');
     const resetFilters = document.getElementById('resetFilters');
+    const propertyFilter = document.getElementById('propertyFilter');
     const unitCards = document.querySelectorAll('.unit-card');
     const totalUnitsView = document.querySelector('.total-units-view')
 
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedType = unitTypeFilter?.value || '';
         const selectedStatus = statusFilter?.value || '';
         const selectedOccupancy = occupancyFilter?.value || '';
+        const selectedProperty = propertyFilter?.value || '';
 
         let visibleCount = 0;
 
@@ -21,14 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const status = card.dataset.status || '';
             const occupancy = card.dataset.occupancy || '';
             const unitNumber = card.dataset.unitNumber || '';
+            const unitProperty = card.dataset.unitProperty || '';
             const cardText = card.textContent.toLowerCase();
 
             const matchesSearch = !searchTerm || unitNumber.toLowerCase().includes(searchTerm) || cardText.includes(searchTerm);
             const matchesType = !selectedType || unitType === selectedType;
             const matchesStatus = !selectedStatus || status === selectedStatus;
             const matchesOccupancy = !selectedOccupancy || occupancy === selectedOccupancy;
+            const matchesProperty = !selectedProperty || unitProperty === selectedProperty;
 
-            const isVisible = matchesSearch && matchesType && matchesStatus && matchesOccupancy;
+            const isVisible = matchesSearch && matchesType && matchesStatus && matchesOccupancy && matchesProperty;
 
             card.style.display = isVisible ? 'flex' : 'none';
 
@@ -46,12 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
     unitTypeFilter?.addEventListener('change', filterUnits);
     statusFilter?.addEventListener('change', filterUnits);
     occupancyFilter?.addEventListener('change', filterUnits);
+    propertyFilter?.addEventListener('change', filterUnits);
 
     resetFilters?.addEventListener('click', () => {
         if (searchInput) searchInput.value = '';
         if (unitTypeFilter) unitTypeFilter.value = '';
         if (statusFilter) statusFilter.value = '';
         if (occupancyFilter) occupancyFilter.value = '';
+        if (propertyFilter) propertyFilter.value = '';
         
         filterUnits();
     });

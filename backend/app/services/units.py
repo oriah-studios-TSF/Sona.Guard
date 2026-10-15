@@ -18,6 +18,22 @@ def get_units_by_property(property_id):
      
     return Unit.query.filter_by(property_id=property_id).order_by(Unit.unit_number.asc()).all()
 
+# Retrieve all units accross properties for the System Owner
+def get_all_units():
+    # Only System owners can access all units
+    if current_user.role != 'system_owner':
+        raise PermissionError('You do not have permission to access all units.')
+
+    return Unit.query.join(Property).order_by(Property.name.asc(), Unit.unit_number.asc()).all()
+
+# Retrieve all properties for the system owner's property filter
+def get_all_properties():
+    # Only System owners can access all properties
+    if current_user.role != 'system_owner':
+        raise PermissionError('You do not have permission to access all properties.')
+
+    return Property.query.order_by(Property.name.asc()).all()
+
 # Create a new unit
 def create_unit(property_id, unit_number, unit_type='house'):
     # Only System owners and Estate Administrators can create units
