@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// Create Unit Model
 const createUnitModel = document.getElementById('create-unit-model')
 const openCreateUnitButton = document.getElementById('open-create-unit-button')
 const closeCreateUnitButton = document.getElementById('close-create-unit-button')
@@ -82,3 +83,48 @@ function closeCreateUnitModel() {
 openCreateUnitButton?.addEventListener('click', openCreateUnitModel)
 closeCreateUnitButton?.addEventListener('click', closeCreateUnitModel)
 cancelCreateUnitButton?.addEventListener('click', closeCreateUnitModel)
+
+
+// View Unit Model
+const viewUnitModel = document.getElementById('view-unit-model');
+const closeViewUnitButton = document.getElementById('close-view-unit-button');
+const cancelViewUnitButton = document.getElementById('cancel-view-unit-button');
+
+document.querySelectorAll('.view-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const card = button.closest('.unit-card');
+
+        
+
+        document.getElementById('view-unit-number').textContent = card.querySelector('.unit-card-header h1').textContent.trim();
+        document.getElementById('view-unit-type').textContent = card.querySelector('.unit-type').textContent.trim();
+        document.getElementById('view-unit-status').textContent = card.querySelector('.unit-status').textContent.trim();
+        
+        const statusBadge = document.getElementById('view-unit-status');
+        const statusElement = card.querySelector('.unit-status');
+        const status = card.dataset.status;
+        statusBadge.textContent = statusElement.textContent.trim();
+        statusBadge.classList.remove('active', 'inactive');
+        statusBadge.classList.add(status);
+        
+        const occupancyBadge = document.getElementById('view-unit-occupancy');
+        const occupancyElement = card.querySelector('.occupation-status');
+        const occupancyStatus = card.dataset.occupancy
+
+        occupancyBadge.textContent = occupancyElement.textContent.trim();
+        occupancyBadge.classList.remove('occupied', 'vacant');
+        occupancyBadge.classList.add(occupancyStatus);
+
+        
+        document.getElementById('view-unit-property').textContent = card.querySelector('.unit-estate').textContent.trim();
+
+        viewUnitModel.classList.add('is-open');
+    });
+});
+
+function closeViewUnitModel() {
+    viewUnitModel.classList.remove('is-open');
+}
+
+closeViewUnitButton?.addEventListener('click', closeViewUnitModel);
+cancelViewUnitButton?.addEventListener('click', closeViewUnitModel);

@@ -104,7 +104,7 @@
                         <p class="occupation-status {{ 'occupied' if unit.residents|selectattr('is_active')|list else 'vacant' }}"><i class="fas fa-circle"></i> {{ 'Occupied' if unit.residents|selectattr('is_active')|list else 'Vacant' }}</p>
                     </div>
                     <div class="unit-card-buttons">
-                        <button type="" class="view-button"><i class="fas fa-eye"></i> View</button>
+                        <button type="button" class="view-button"><i class="fas fa-eye"></i> View</button>
                         {% if current_user.role in ['system_owner', 'estate_admin'] %}
                             <button class="edit-button"><i class="fas fa-edit"></i> Edit</button>
                         {% endif %}
@@ -169,6 +169,52 @@
                 </div>
 
             </form>
+
+        </div>
+    </div>
+
+    <div class="view-unit-model" id="view-unit-model">
+        <div class="view-unit-header">
+            <div class="left">
+                <i class="fas fa-house"></i>
+                <div>
+                    <h1>Unit Details</h1>
+                    <p>View residential unit details</p>
+                </div>
+            </div>
+            <div class="right">
+                <button id="close-view-unit-button" type="button"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div class="view-unit-body">
+            <div class="view-unit-detail">
+                <span>Unit Number</span>
+                <strong id="view-unit-number">-</strong>
+            </div>
+
+            <div class="view-unit-detail">
+                <span>Estate/Property</span>
+                <strong id="view-unit-property">-</strong>
+            </div>
+
+            <div class="view-unit-detail">
+                <span>Unit Type</span>
+                <strong id="view-unit-type">-</strong>
+            </div>
+
+            <div class="view-unit-detail">
+                <span>Status</span>
+                <strong class="unit-status" id="view-unit-status">-</strong>
+            </div>
+
+            <div class="view-unit-detail">
+                <span>Occupancy</span>
+                <strong class="occupation-status" id="view-unit-occupancy">-</strong>
+            </div>
+
+            <div class="view-unit-footer">
+                <button type="button" class="cancel-button" id="cancel-view-unit-button">Close</button>
+            </div>
 
         </div>
     </div>

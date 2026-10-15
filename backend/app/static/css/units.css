@@ -292,7 +292,6 @@
     padding: 5px 10px;
     border-radius: 50px;
     width: fit-content;
-    margin-top: 10px;
 }
 
 .occupation-status.occupied {
@@ -302,10 +301,9 @@
     padding: 5px 10px;
     border-radius: 50px;
     width: fit-content;
-    margin-top: 10px;
 }
 
-.create-unit-model {
+.create-unit-model, .view-unit-model {
     position: absolute;
     top: 0;
     right: 0;
@@ -324,23 +322,23 @@
     display: flex;
 }
 
-.create-unit-header {
+.create-unit-header, .view-unit-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.create-unit-header .left {
+.create-unit-header .left, .view-unit-header .left {
     display: flex;
     gap: 10px;
     align-items: center;
 }
 
-.create-unit-header .left i {
+.create-unit-header .left i, .view-unit-header .left i {
     font-size: 30pt;
 }
 
-#close-create-unit-button {
+#close-create-unit-button, #close-view-unit-button {
     border: none;
     background-color: transparent;
     color: white;
@@ -348,22 +346,22 @@
     cursor: pointer;
 }
 
-#close-create-unit-button:hover {
+#close-create-unit-button:hover, #close-view-unit-button:hover {
     color: orangered;
 }
 
-.create-unit-header h1 {
-    font-size: 18pt;
+.create-unit-header h1, .view-unit-header h1 {
+    font-size: 15pt;
     font-weight: 500;
     margin-bottom: 5px;
 }
 
-.create-unit-header p {
+.create-unit-header p, .view-unit-header p {
     font-size: 11pt;
     font-weight: 300;
 }
 
-.create-unit-body {
+.create-unit-body, .view-unit-body {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
@@ -403,7 +401,7 @@
     text-transform: uppercase;
 }
 
-.create-unit-footer {
+.create-unit-footer, .view-unit-footer {
     margin-top: 10px;
     display: flex;
     justify-content: flex-end;
@@ -413,7 +411,7 @@
     right: 20px;
 }
 
-.create-unit-footer button {
+.create-unit-footer button, .view-unit-footer button {
     padding: 10px 20px;
     border-radius: 10px;
     border: none;
@@ -432,6 +430,33 @@
 .cancel-button {
     background-color: orangered !important;
     color: white !important;
+}
+
+.view-unit-model.is-open {
+    display: block;
+}
+
+.view-unit-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 16px;
+    border-radius: 10px;
+    border: 2px solid lightslategray;
+    margin-bottom: 10px;
+}
+
+.view-unit-detail span {
+    color: #71717a;
+    font-size: 11pt;
+    font-weight: 500;
+}
+
+.view-unit-detail strong {
+    color: white;
+    font-size: 12pt;
+    font-weight: 600;
+    overflow-wrap: anywhere;
 }
 
 
