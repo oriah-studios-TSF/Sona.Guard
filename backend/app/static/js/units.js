@@ -65,3 +65,20 @@ document.addEventListener('DOMContentLoaded', () => {
     filterUnits();
 
 });
+
+const createUnitModel = document.getElementById('create-unit-model')
+const openCreateUnitButton = document.getElementById('open-create-unit-button')
+const closeCreateUnitButton = document.getElementById('close-create-unit-button')
+const cancelCreateUnitButton = document.getElementById('cancel-create-unit-button')
+
+function openCreateUnitModel() {
+    createUnitModel.classList.add('is-open')
+}
+
+function closeCreateUnitModel() {
+    createUnitModel.classList.remove('is-open')
+}
+
+openCreateUnitButton?.addEventListener('click', openCreateUnitModel)
+closeCreateUnitButton?.addEventListener('click', closeCreateUnitModel)
+cancelCreateUnitButton?.addEventListener('click', closeCreateUnitModel)

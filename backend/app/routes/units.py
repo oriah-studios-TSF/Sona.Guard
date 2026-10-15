@@ -1,6 +1,6 @@
 from app.services.units import get_units_by_property, get_unit_statistics, get_all_properties, get_all_units, create_unit
 from app.models import Unit, Property, Resident
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from app.services.auth import role_required
 
@@ -72,3 +72,28 @@ def index():
         statistics=statistics,
         properties=None
     )
+
+
+# Endpoint: POST /units/create
+# Create a resedential unit withing an authorized property
+@units_bp.route('/create', methods=['POST'])
+@role_required('system_owner', 'estate_admin')
+def create():
+    # System Owners select the property, Estate Admins user their assigned property
+    if current_user.role == 'system_owner':
+        property_id = request.form.get('property_id', type=int)
+    else:
+        property_id = current_user.property_id
+
+    unit_number = request.form.get('unit_number', '').strip().upper()
+    unit_type = request.form.get('unit_type', '').strip().lower()
+
+    try:
+        unit = create_unit(property_id, unit_number, unit_type)
+        flash(f'Unit {unit.unit_number} has been created successfully', 'success')
+    except (PermissionError, ValueError) as error:
+        flash(str(error), 'error')
+
+    return redirect(url_for('units.index'))
+
+        

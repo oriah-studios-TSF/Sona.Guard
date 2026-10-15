@@ -307,17 +307,21 @@
 
 .create-unit-model {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    height: 600px;
+    top: 0;
+    right: 0;
+    width: 500px;
+    height: 100vh;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     background-color: #27313b;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+    color: white;
     display: flex;
     flex-direction: column;
     padding: 20px;
+    display: none;
+}
+
+.create-unit-model.is-open {
+    display: flex;
 }
 
 .create-unit-header {
@@ -326,7 +330,17 @@
     align-items: center;
 }
 
-.create-unit-close-button {
+.create-unit-header .left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.create-unit-header .left i {
+    font-size: 30pt;
+}
+
+#close-create-unit-button {
     border: none;
     background-color: transparent;
     color: white;
@@ -334,15 +348,17 @@
     cursor: pointer;
 }
 
+#close-create-unit-button:hover {
+    color: orangered;
+}
+
 .create-unit-header h1 {
-    color: white;
-    font-size: 20pt;
+    font-size: 18pt;
     font-weight: 500;
     margin-bottom: 5px;
 }
 
 .create-unit-header p {
-    color: white;
     font-size: 11pt;
     font-weight: 300;
 }
@@ -362,14 +378,14 @@
 .create-unit-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 .create-unit-body .form-group label {
-    color: white;
     font-size: 11pt;
     font-weight: 400;
     margin-bottom: 10px;
+    color: white;
 }
 
 .create-unit-body .form-group input, .create-unit-body .form-group select {
@@ -379,16 +395,22 @@
     outline: none;
     font-size: 10pt;
     font-weight: 400;
-    background-color: #27313b;
     color: white;
+    background-color: #27313b;
+}
+
+.create-unit-body .form-group input[type='text'] {
+    text-transform: uppercase;
 }
 
 .create-unit-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
     position: absolute;
     bottom: 20px;
     right: 20px;
-    display: flex;
-    gap: 10px;
 }
 
 .create-unit-footer button {
@@ -411,6 +433,7 @@
     background-color: orangered !important;
     color: white !important;
 }
+
 
 
 

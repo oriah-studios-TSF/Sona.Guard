@@ -69,7 +69,7 @@
             </select>
             <button type="button" id="resetFilters"><i class="fas fa-rotate-right"></i> Reset</button>
             {% if current_user.role in ['system_owner', 'estate_admin'] %}
-                <button type="button" class="add-unit-button" id="openCreateUnitModal"><i class="fas fa-plus"></i> Add Unit</button>
+                <button type="button" class="add-unit-button" id="open-create-unit-button"><i class="fas fa-plus"></i> Add Unit</button>
             {% endif %}
         </div>
     </div>
@@ -119,14 +119,17 @@
         </div>
     </section>
 
-    <div class="create-unit-model">
+    <div class="create-unit-model" id="create-unit-model">
         <div class="create-unit-header">
             <div class="left">
-                <h1>Add Residential Unit</h1>
-                <p>Register a new unit within an estate.</p>
+                <i class="fas fa-house"></i>
+                <div>
+                    <h1>Add Residential Unit</h1>
+                    <p>Register a new unit within an estate.</p>
+                </div>
             </div>
             <div class="right">
-                <button class="create-unit-close-button" type="button"><i class="fas fa-times"></i></button>
+                <button id="close-create-unit-button" type="button"><i class="fas fa-times"></i></button>
             </div>
         </div>
         <div class="create-unit-body">
@@ -151,21 +154,22 @@
 
                 <div class="form-group">
                     <label for="unit_type">Unit Type *</label>
-                    <select name="unit_type" id="unit_type" required">
+                    <select name="unit_type" id="unit_type" required>
                         <option value="house">House</option>
                         <option value="apartment">Apartment</option>
                         <option value="townhouse">Townhouse</option>
                     </select>
                 </div>
 
+                <div class="create-unit-footer">
+                    <div class="footer-buttons">
+                        <button type="button" class="cancel-button" id="cancel-create-unit-button">Cancel</button>
+                        <button type="submit" class="create-unit-button" id="create-unit-button"><i class="fa-solid fa-plus"></i> Create Unit</button>
+                    </div>
+                </div>
+
             </form>
 
-            <div class="create-unit-footer">
-                <div class="footer-buttons">
-                    <button class="cancel-button" id="cancel-button">Cancel</button>
-                    <button class="create-unit-button" id="create-unit-button"><i class="fa-solid fa-plus"></i> Create Unit</button>
-                </div>
-            </div>
         </div>
     </div>
 
