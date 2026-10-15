@@ -68,7 +68,7 @@
                 <option value="vacant">Vacant</option>
             </select>
             <button type="button" id="resetFilters"><i class="fas fa-rotate-right"></i> Reset</button>
-            {% if current_user.role == 'system_admin %}
+            {% if current_user.role in ['system_owner', 'estate_admin'] %}
                 <button type="button" class="add-unit-button" id="openCreateUnitModal"><i class="fas fa-plus"></i> Add Unit</button>
             {% endif %}
         </div>
