@@ -70,6 +70,13 @@
     background: transparent;
     font-size: 10pt;
     width: 100%;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-bar .input-row input::placeholder {
+    text-transform: none;
 }
 
 .filter-row {
@@ -84,7 +91,7 @@
     border-radius: 10px;
     font-size: 10pt;
     width: 150px;
-    background-color: transparent;
+    background-color: #27313b;
     color: white;
     cursor: pointer;
 }
@@ -199,9 +206,11 @@
 
 .units-cards-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
     width: 100%;
+    max-width: 1600px;
+    justify-content: start;
 }
 
 .unit-card {
@@ -211,9 +220,8 @@
     background-color: #27313b;
     display: flex;
     flex-direction: column;
+    
     gap: 20px;
-    max-width: 300px;
-    width: 100%;
     color: black;
 }
 

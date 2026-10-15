@@ -1,4 +1,4 @@
-from app.services.units import get_units_by_property
+from app.services.units import get_units_by_property, get_unit_statistics
 from flask import Blueprint, render_template, abort
 from flask_login import login_required, current_user
 from app.services.auth import role_required
@@ -15,13 +15,21 @@ def index():
     # System owners can manage units across estates, so they need to select an estate first.
     # Estate admins and security supervisors can only manage units within their assigned estate.
     if current_user.role == 'system_owner':
+        statistics = {
+            'total_units': 0,
+            'occupied_units': 0,
+            'vacant_units': 0,
+            'inactive_units': 0
+        }
+        
         return render_template(
             'units/index.html',
             title='Unit Management',
             title_description='Manage residential units and house assignments within your estate.',
             icon='house-user',
             units=[],
-            properties=None
+            properties=None,
+            statistics=statistics
         )
 
     # Estate-scoped usres must have a property assigned to their account
@@ -34,6 +42,7 @@ def index():
     # Get all units for the current user's property
     try:
         units = get_units_by_property(current_user.property_id)
+        statistics = get_unit_statistics(current_user.property_id)
     except PermissionError:
         abort(403)
     except ValueError:
@@ -45,5 +54,6 @@ def index():
         title_description='Manage residential units and house assignments within your estate.',
         icon='house-user',
         units=units,
+        statistics=statistics,
         properties=None
     )

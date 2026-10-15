@@ -13,25 +13,25 @@
         <div class="cards">
             <div class="card">
                 <span class="card-title">Total Units</span>
-                <span class="card-value">1,260</span>
-                <span class="card-description"><i class="fas fa-arrow-up"></i> 12% from last month.</span>
+                <span class="card-value">{{ statistics.total_units }}</span>
+                <span class="card-description"><i class="fas fa-circle-info"></i> Total units registered in this estate</span>
             </div>
 
             <div class="card">
                 <span class="card-title">Occupied Units</span>
-                <span class="card-value">987</span>
-                <span class="card-description"><i class="fas fa-arrow-up"></i> 8% from last month.</span>
+                <span class="card-value">{{ statistics.occupied_units }}</span>
+                <span class="card-description"><i class="fas fa-circle-info"></i> Units with active residents</span>
             </div>
 
             <div class="card">
                 <span class="card-title">Vacant Units</span>
-                <span class="card-value">273</span>
-                <span class="card-description"><i class="fas fa-arrow-down"></i> 4% from last month.</span>
+                <span class="card-value">{{ statistics.vacant_units }}</span>
+                <span class="card-description"><i class="fas fa-circle-info"></i> Active units without residents.</span>
             </div>
 
             <div class="card">
                 <span class="card-title">Inactive Units</span>
-                <span class="card-value">12</span>
+                <span class="card-value">{{ statistics.inactive_units }}</span>
                 <span class="card-description"><i class="fas fa-circle-info"></i> Units disabled by estate management.</span>
             </div>
         </div>
@@ -43,19 +43,28 @@
             <input type="text" id="searchInput" placeholder="Search by unit number, resident name or resident code...">
         </div>
         <div class="filter-row">
-            <select name="" id="">
-                <option value="">All Properties</option>
-            </select>
-            <select name="" id="">
+            {% if current_user.role == 'system_owner' %}
+                <select name="property" id="propertyFilter">
+                    <option value="">All Properties</option>
+                </select>
+            {% endif %}
+            <select name="unit_type" id="unitTypeFilter">
                 <option value="">All Unit Types</option>
+                <option value="house">House</option>
+                <option value="apartment">Apartment</option>
+                <option value="townhouse">Townhouse</option>
             </select>
-            <select name="" id="">
+            <select name="status" id="statusFilter">
                 <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
             </select>
-            <select name="" id="">
+            <select name="occupancy" id="occupancyFilter">
                 <option value="">All Occupancy</option>
+                <option value="occupied">Occupied</option>
+                <option value="vacant">Vacant</option>
             </select>
-            <button type="button"><i class="fas fa-rotate-right"></i> Reset</button>
+            <button type="button" id="resetFilters"><i class="fas fa-rotate-right"></i> Reset</button>
             <button type="button" class="add-unit-button"><i class="fas fa-plus"></i> Add Unit</button>
         </div>
     </div>
@@ -79,7 +88,7 @@
     <section class="section card-view">
         <div class="units-cards-row">
             {% for unit in units %}
-                <div class="unit-card">
+                <div class="unit-card" data-unit-type="{{ unit.unit_type}}" data-status="{{ 'active' if unit.is_active else 'inactive' }}" data-occupancy="{{ 'occupied' if unit.residents|selectattr('is_active')|list else 'vacant' }}" data-unit-number="{{ unit.unit_number }}">
                     <div class="unit-card-header">
                         <h1>{{ unit.unit_number }}</h1>
                         <p class="unit-status {{ 'active' if unit.is_active else 'inactive' }}"> {{ 'Active' if unit.is_active else 'Inactive' }}</p>
@@ -104,7 +113,8 @@
             {% endfor %}
         </div>
     </section>
-    {% endblock %}
+
     <script src="{{ url_for('static', filename='js/units.js') }}"></script>
+    {% endblock %}
 </body>
 </html>
