@@ -4,7 +4,7 @@
 
 **Estate Access Control & Visitor Management System**
 
-sona.guard is a Flask-based access-control system designed to help residential estates manage residents, visitors, entrances, and access verification through a centralised application.
+Sona.Guard is a Flask-based access-control system designed to help residential estates manage residents, visitors, entrances, and access verification through a centralised application.
 
 The project is being developed as a practical exploration of backend engineering, authentication, role-based permissions, database relationships, and access-control business logic.
 
