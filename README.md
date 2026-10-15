@@ -28,13 +28,13 @@ Features are being implemented and tested incrementally. The list above describe
 The screenshots below show selected parts of sona.guard as development progresses. Some interfaces are still under development and may not represent completed workflows.
 
 ### Staff Login
-![Sona.Guard staff login](docs/screenshots/login-interface.png)
+![Sona.Guard staff login](docs/screenshots/login-interface.jpeg)
 
 ### Resident Verification
-![Sona.Guard resident verification](docs/screenshots/resident-verification.png)
+![Sona.Guard resident verification](docs/screenshots/resident-verification.jpeg)
 
 ### Residential Unit Management — In Development
-![Sona.Guard unit management](docs/screenshots/unit-management.png)
+![Sona.Guard unit management](docs/screenshots/unit-management.jpeg)
 
 ### Access Granted
 ![Sona.Guard access granted confirmation](docs/screenshots/access-granted.png)
