@@ -4,6 +4,8 @@ from app.extensions import db
 from app.models import Property, Unit, Resident
 from app.services.auth import can_access_property
 
+import re
+
 
 # Retrieve all units belonging to a specific property
 def get_units_by_property(property_id):
@@ -60,6 +62,9 @@ def create_unit(property_id, unit_number, unit_type='house'):
 
     if not unit_number:
         raise ValueError('Unit number is required.')
+
+    if not re.fullmatch(r'(?=.*[0-9])[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*', unit_number):
+        raise ValueError('Enter a valid unit number, such as A-101, 101, or 12A.')
 
     # Validate the unit type against the supported types in V1
     allowed_unit_types = {'house', 'apartment', 'townhouse'}
@@ -125,3 +130,59 @@ def get_unit_statistics(property_id):
         'vacant_units': vacant_units,
         'inactive_units': inactive_units
     }
+
+# Edit unit details
+def update_unit(unit_id, unit_number, unit_type, is_active):
+    if current_user.role not in {'system_owner', 'estate_admin'}:
+        raise PermissionError('You do not have permission to edit units.')
+
+    # Fetch the unit to update
+    unit = db.session.get(Unit,unit_id)
+    
+    if not unit:
+        raise ValueError('Unit not found.')
+
+    if not can_access_property(unit.property_id):
+        raise PermissionError('You do not have permission to edit units in this property.')
+
+    if not unit.property.is_active:
+        raise ValueError('Units in an inactive estate cannot be edited.')
+
+    unit_number = unit_number.strip()
+    unit_type = unit_type.strip().lower()
+
+    if not unit_number:
+        raise ValueError('Unit number is required.')
+
+    # Validate unit number format
+    if not re.fullmatch(r'(?=.*[0-9])[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*', unit_number):
+        raise ValueError('Enter a valid unit number, such as A-101, 101, or 12A.')
+
+    if unit_type not in {'house', 'apartment', 'townhouse'}:
+        raise ValueError('Please select a valid unit type.')
+
+    # Validate unit status
+    if not isinstance(is_active, bool):
+        raise ValueError('Please select a valid unit status.')
+
+    duplicate = Unit.query.filter(
+        Unit.property_id == unit.property_id,
+        Unit.unit_number == unit_number,
+        Unit.id != unit_id
+    ).first()
+
+    if duplicate:
+        raise ValueError('A unit with this number already exists in this estate.')
+
+    # Prevent deactivation if unit has active residents
+    if not is_active and any(resident.is_active for resident in unit.residents):
+        raise ValueError('This unit has active residents. Update their assignments before deactivating it.')
+
+    # Update unit details
+    unit.unit_number = unit_number
+    unit.unit_type = unit_type
+    unit.is_active = is_active
+
+    db.session.commit()
+
+    return unit

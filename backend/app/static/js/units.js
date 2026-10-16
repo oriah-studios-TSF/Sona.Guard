@@ -128,3 +128,29 @@ function closeViewUnitModel() {
 
 closeViewUnitButton?.addEventListener('click', closeViewUnitModel);
 cancelViewUnitButton?.addEventListener('click', closeViewUnitModel);
+
+// Edit Unit Model
+const editUnitModel = document.getElementById('edit-unit-model');
+const editUnitForm = document.getElementById('edit-unit-form');
+const closeEditUnitButton = document.getElementById('edit-unit-close-button');
+const cancelEditUnitButton = document.getElementById('cancel-edit-unit');
+
+document.querySelectorAll('.edit-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const card = button.closest('.unit-card');
+
+        document.getElementById('edit-unit-number').value = card.dataset.unitNumber;
+        document.getElementById('edit-unit-type').value = card.dataset.unitType;
+        document.getElementById('edit-unit-status').value = card.dataset.status === 'active' ? 'true' : 'false'
+
+        editUnitForm.action = `/units/${card.dataset.unitId}/edit`;
+        editUnitModel.classList.add('is-open');
+    });
+});
+
+function closeEditUnitModel() {
+    editUnitModel.classList.remove('is-open');
+}
+
+closeEditUnitButton?.addEventListener('click', closeEditUnitModel);
+cancelEditUnitButton?.addEventListener('click', closeEditUnitModel);

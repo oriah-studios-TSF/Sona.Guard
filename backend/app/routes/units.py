@@ -1,4 +1,4 @@
-from app.services.units import get_units_by_property, get_unit_statistics, get_all_properties, get_all_units, create_unit
+from app.services.units import get_units_by_property, get_unit_statistics, get_all_properties, get_all_units, create_unit, update_unit
 from app.models import Unit, Property, Resident
 from flask import Blueprint, render_template, abort, request, redirect, url_for, flash
 from flask_login import login_required, current_user
@@ -92,6 +92,32 @@ def create():
         unit = create_unit(property_id, unit_number, unit_type)
         flash(f'Unit {unit.unit_number} has been created successfully', 'success')
     except (PermissionError, ValueError) as error:
+        flash(str(error), 'error')
+
+    return redirect(url_for('units.index'))
+
+# Edit a residential unit within an authorized property
+@units_bp.route('/<int:unit_id>/edit', methods=['POST'])
+@role_required('system_owner', 'estate_admin')
+def edit(unit_id):
+    unit_number = request.form.get('unit_number', '').strip().upper()
+    unit_type = request.form.get('unit_type', '').strip().lower()
+    status_value = request.form.get('is_active', '')
+
+    # Validate the status value, it should be either 'true' or 'false'
+    if status_value not in {'true', 'false'}:
+        flash('Please select a valid status for the unit', 'error')
+        return redirect(url_for('units.index'))
+
+    # Convert the status value to a boolean
+    is_active = status_value == 'true'
+
+    try:
+        unit = update_unit(unit_id, unit_number, unit_type, is_active)
+        flash(f'Unit {unit.unit_number} has been updated successfully', 'success')
+    except PermissionError:
+        abort(403)
+    except ValueError as error:
         flash(str(error), 'error')
 
     return redirect(url_for('units.index'))
