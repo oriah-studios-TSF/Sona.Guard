@@ -108,7 +108,15 @@
                         {% if current_user.role in ['system_owner', 'estate_admin'] %}
                             <button type="button" class="edit-button"><i class="fas fa-edit"></i> Edit</button>
                         {% endif %}
-                        <button class="more"><i class="fas fa-ellipsis-h"></i></button>
+                        <div class="unit-more-container">
+                            <button class="more" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></button>
+                            <div class="unit-more-menu">
+                                <button type="button" class="view-residents-button more-button"><i class="fas fa-users"></i> View Resident Assignments</button>
+                                {% if current_user.role in ['system_owner', 'estate_admin'] %}
+                                    <button type="button" class="toggle-unit-status-button more-button"><i class="fas {{ 'fa-toggle-off' if unit.is_active else 'fa-toggle-on' }}"></i> {{ 'Deactivate Unit' if unit.is_active else 'Activate Unit' }}</button>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% else %}

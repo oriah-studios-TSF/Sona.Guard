@@ -154,3 +154,64 @@ function closeEditUnitModel() {
 
 closeEditUnitButton?.addEventListener('click', closeEditUnitModel);
 cancelEditUnitButton?.addEventListener('click', closeEditUnitModel);
+
+// More options container
+// Find every element with the class "unit-more-container" on the page.
+// Each unit card has its own container for the More button and its dropdown menu.
+document.querySelectorAll('.unit-more-container').forEach(container => {
+
+    // Find the More button that belongs to this particular container.
+    // Using container.querySelector() ensures we get the button for this unit,
+    // rather than accidentally selecting a button from another unit card.
+    const moreButton = container.querySelector('.more');
+
+    // Listen for a click on this unit's More button.
+    // The function inside addEventListener() runs whenever the button is clicked.
+    moreButton.addEventListener('click', event => {
+
+        // Stop this click from travelling up through the HTML element hierarchy.
+        // This is called event bubbling.
+        // It is useful when another click listener on a parent or the document
+        // should not treat this button click as a click somewhere outside the menu.
+        event.stopPropagation();
+
+        // Check whether this unit's menu is already open.
+        // classList.contains() returns true if the container currently has
+        // the CSS class "is-open", or false if it does not.
+        // We save the result because we need to know whether to open or close it.
+        const isAlreadyOpen = container.classList.contains('is-open');
+
+        // Find every unit menu that is currently open.
+        // The selector ".unit-more-container.is-open" means an element must have
+        // BOTH classes: "unit-more-container" and "is-open".
+        document.querySelectorAll('.unit-more-container.is-open').forEach(openContainer => {
+
+            // Remove the "is-open" class from each open menu.
+            // Your CSS uses this class to control whether the dropdown is visible.
+            // Removing it closes the menu.
+            openContainer.classList.remove('is-open');
+
+            // Find the More button inside this menu and update its accessibility state.
+            // aria-expanded="false" communicates that the menu is now collapsed.
+            // The optional chaining operator (?.) means setAttribute() is called
+            // only if a More button was found. If there is no button, JavaScript
+            // skips this call instead of throwing an error.
+            openContainer.querySelector('.more')?.setAttribute('aria-expanded', 'false');
+        });
+
+        // Now decide whether to reopen this menu.
+        // We saved isAlreadyOpen BEFORE closing all the menus.
+        // If it was already open, we leave it closed.
+        // If it was closed, we open it.
+        if (!isAlreadyOpen) {
+
+            // Add the "is-open" class to this unit's container.
+            // Your CSS detects this class and displays its dropdown menu.
+            container.classList.add('is-open');
+
+            // Tell assistive technology that this button's menu is expanded.
+            // The value is a string because HTML attribute values are text.
+            moreButton.setAttribute('aria-expanded', 'true');
+        }
+    });
+});

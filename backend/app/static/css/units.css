@@ -459,6 +459,39 @@
     overflow-wrap: anywhere;
 }
 
+.unit-more-container {
+    position: relative;
+}
+
+.unit-more-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: -150px;
+    min-width: 250px;
+    padding: 6px;
+    background-color: white;
+    border-radius: 10px !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+    z-index: 20;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.more-button {
+    width: 100%;
+    padding: 10px!important;
+    text-align: left !important;
+}
+
+.unit-more-menu.is-open {
+    display: block;
+}
+
+.unit-more-container.is-open .unit-more-menu {
+    display: flex;
+}
+
 
 
 
