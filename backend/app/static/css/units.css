@@ -286,6 +286,24 @@
     width: fit-content;
 }
 
+.resident-assignment-list-status.active {
+    font-size: 10pt;
+    color: #27313b;
+    background-color: greenyellow;
+    padding: 5px 10px;
+    border-radius: 50px;
+    width: fit-content;
+}
+
+.resident-assignment-list-status.inactive {
+    font-size: 10pt;
+    color: #27313b;
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 50px;
+    width: fit-content;
+}
+
 .occupation-status.vacant {
     font-size: 10pt;
     color: #27313b;
@@ -304,7 +322,7 @@
     width: fit-content;
 }
 
-.create-unit-model, .view-unit-model, .edit-unit-model {
+.create-unit-model, .view-unit-model, .edit-unit-model, .resident-assignments-model {
     position: absolute;
     top: 0;
     right: 0;
@@ -319,27 +337,27 @@
     display: none;
 }
 
-.create-unit-model.is-open, .edit-unit-model.is-open {
+.create-unit-model.is-open, .edit-unit-model.is-open, .resident-assignments-model.is-open {
     display: flex;
 }
 
-.create-unit-header, .view-unit-header, .edit-unit-header {
+.create-unit-header, .view-unit-header, .edit-unit-header, .resident-assignments-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.create-unit-header .left, .view-unit-header .left, .edit-unit-header .left {
+.create-unit-header .left, .view-unit-header .left, .edit-unit-header .left, .resident-assignments-header .left {
     display: flex;
     gap: 10px;
     align-items: center;
 }
 
-.create-unit-header .left i, .view-unit-header .left i, .edit-unit-header .left i {
+.create-unit-header .left i, .view-unit-header .left i, .edit-unit-header .left i, .resident-assignments-header .left i {
     font-size: 30pt;
 }
 
-#close-create-unit-button, #close-view-unit-button, #edit-unit-close-button {
+#close-create-unit-button, #close-view-unit-button, #edit-unit-close-button, #resident-assignments-close-button {
     border: none;
     background-color: transparent;
     color: white;
@@ -347,22 +365,22 @@
     cursor: pointer;
 }
 
-#close-create-unit-button:hover, #close-view-unit-button:hover, #edit-unit-close-button:hover {
+#close-create-unit-button:hover, #close-view-unit-button:hover, #edit-unit-close-button:hover, #resident-assignments-close-button:hover {
     color: orangered;
 }
 
-.create-unit-header h1, .view-unit-header h1, .edit-unit-header h1 {
+.create-unit-header h1, .view-unit-header h1, .edit-unit-header h1, .resident-assignments-header h1 {
     font-size: 15pt;
     font-weight: 500;
     margin-bottom: 5px;
 }
 
-.create-unit-header p, .view-unit-header p, .edit-unit-header p {
+.create-unit-header p, .view-unit-header p, .edit-unit-header p, .resident-assignments-header p {
     font-size: 11pt;
     font-weight: 300;
 }
 
-.create-unit-body, .view-unit-body, .edit-unit-body {
+.create-unit-body, .view-unit-body, .edit-unit-body, .resident-assignments-body {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
@@ -402,7 +420,7 @@
     text-transform: uppercase;
 }
 
-.create-unit-footer, .view-unit-footer, .edit-unit-footer {
+.create-unit-footer, .view-unit-footer, .edit-unit-footer, .resident-assignments-footer {
     margin-top: 10px;
     display: flex;
     justify-content: flex-end;
@@ -412,7 +430,7 @@
     right: 20px;
 }
 
-.create-unit-footer button, .view-unit-footer button, .edit-unit-footer button {
+.create-unit-footer button, .view-unit-footer button, .edit-unit-footer button, .resident-assignments-footer button {
     padding: 10px 20px;
     border-radius: 10px;
     border: none;
@@ -423,7 +441,7 @@
     cursor: pointer;
 }
 
-.create-unit-footer button:hover, .view-unit-footer button:hover, .edit-unit-footer button:hover {
+.create-unit-footer button:hover, .view-unit-footer button:hover, .edit-unit-footer button:hover, .resident-assignments-footer button:hover {
     background-color: #0438ff;
     color: white;
 }
@@ -466,8 +484,8 @@
 .unit-more-menu {
     display: none;
     position: absolute;
-    top: calc(100% + 8px);
-    left: -150px;
+    top: -100px;
+    left: -160px;
     min-width: 250px;
     padding: 6px;
     background-color: white;
@@ -490,6 +508,80 @@
 
 .unit-more-container.is-open .unit-more-menu {
     display: flex;
+}
+
+.resident-assignments-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid lightslategray;
+    padding: 15px 16px;
+    border-radius: 10px;
+}
+
+.mt-3 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mt-3 i {
+    font-size: 15pt;
+}
+
+.mt-3 div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.mt-3 span {
+    font-size: 10pt;
+    color: lightslategray;
+}
+
+.mt-3 p {
+    font-size: 11pt;
+    color: white;
+}
+
+.mt-3 img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.resident-assignment-list-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.resident-assignment-list-status {
+    margin-top: 5px;
+}
+
+.resident-assignment-list-header {
+    margin-bottom: 10px;
+}
+
+.resident-assignment-empty {
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 15px 16px;
+    background-color: #ffc107;
+    color: #27313b;
+}
+
+.resident-assignment-empty h3 {
+    font-size: 12pt;
+    font-weight: 600;
+}
+
+.resident-assignment-empty p {
+    margin-top: 5px;
+    font-size: 10pt;
 }
 
 

@@ -186,3 +186,27 @@ def update_unit(unit_id, unit_number, unit_type, is_active):
     db.session.commit()
 
     return unit
+    
+# Retrieve residents assigned to a specific unit
+def get_residents_by_unit(unit_id):
+    # Check whether the current user may access this unit
+    if current_user.role not in ['system_owner', 'estate_admin', 'security_supervisor']:
+       raise PermissionError('You do not have access to view the assigned residents of this unit.')
+      
+    unit = db.session.get(Unit, unit_id)
+    
+    if not unit:
+        raise ValueError('Unit not found.')
+
+    if not can_access_property(unit.property_id):
+        raise PermissionError('You do not have access to view the residents of this unit.')
+
+    residents = Resident.query.filter_by(unit_id=unit_id).order_by(Resident.full_name.asc()).all()
+
+    return residents
+
+    
+    
+    
+   
+    

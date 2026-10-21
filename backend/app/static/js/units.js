@@ -215,3 +215,105 @@ document.querySelectorAll('.unit-more-container').forEach(container => {
         }
     });
 });
+
+// Resident Assignemnt Model
+const residentAssignmentModal = document.getElementById('resident-assignments-model');
+const residentAssignmentModalCloseButton = document.getElementById('resident-assignments-close-button');
+const closeResidentAssignmentButton = document.getElementById('close-resident-assignments');
+
+// Open Resident Assignemtns from the More menu
+document.querySelectorAll('.view-residents-button').forEach(button => {
+    button.addEventListener('click', async () => {
+        // Identify the unit card containing the clicked button
+        const card = button.closest('.unit-card');
+        
+        // Find the container where the resident cards appear.
+        const residentList = document.getElementById('resident-assignments-list');
+        
+        // Request the residents assigned to this unit
+        try {
+            const response = await fetch(`/units/${card.dataset.unitId}/residents`);
+
+            // Stop if flask reports an unsuccessful respononse
+            if (!response.ok) {
+                throw new Error('Could not load residents for this unit.');
+            }
+
+            // Convert the JSON response into a JS object
+            const data = await response.json();
+
+            const emptyState = document.getElementById('resident-assignment-empty');
+
+
+            // Check whether this unit has any residents asssigned to it
+            if (data.residents.length === 0) {
+                emptyState.style.display = 'block';
+                residentList.style.display = 'none';
+                
+                
+            } else {
+                // Hide the empty state when residents exist.
+                emptyState.style.display = 'none';
+            }
+
+    
+            // Create a card for each resident returned
+            // Use the existing HTML elements to display the resident details.
+            data.residents.forEach(resident => {
+                document.getElementById('resident-assignment-list-full-name').textContent =
+                    resident.full_name;
+            
+                document.getElementById('resident-assignment-list-resident-code').textContent =
+                    resident.resident_code;
+            
+                document.getElementById('resident-assignment-list-phone').textContent =
+                    resident.phone_number;
+            
+                document.getElementById('resident-assignment-list-email').textContent =
+                    resident.email || 'Not provided';
+            
+                document.getElementById('resident-assignment-list-status').textContent =
+                    `${resident.is_active ? 'Active' : 'Inactive'}`;
+
+                
+                document.getElementById('resident-assignment-list-status').classList.add(
+                    resident.is_active ? 'active' : 'inactive'
+                );
+            });
+
+            
+        } catch (error) {
+            residentList.textContent = error.message;
+        }
+
+        // Display the selected unit's details in the model
+        document.getElementById('assignments-unit-number').textContent = card.querySelector('.unit-card-header h1').textContent.trim();
+        document.getElementById('assignments-unit-estate').textContent = card.querySelector('.unit-estate').textContent.trim();
+
+        // Open the modal
+        residentAssignmentModal.classList.add('is-open');
+
+        const menuContainer = button.closest('.unit-more-container');
+
+        // Close the More menu after selectiong an action
+
+        if (menuContainer) {
+            menuContainer.classList.remove('is-open');
+            menuContainer.querySelector('.more')?.setAttribute('aria-expanded', 'false');
+        }
+        
+    });
+});
+
+// Close the Resident Assignments Modal
+function closeResidentAssignmentModal() {
+    residentAssignmentModal.classList.remove('is-open');
+}
+
+
+
+// 
+residentAssignmentModalCloseButton?.addEventListener('click', closeResidentAssignmentModal);
+closeResidentAssignmentButton?.addEventListener('click', closeResidentAssignmentModal);
+
+

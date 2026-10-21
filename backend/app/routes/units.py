@@ -1,6 +1,6 @@
-from app.services.units import get_units_by_property, get_unit_statistics, get_all_properties, get_all_units, create_unit, update_unit
+from app.services.units import get_units_by_property, get_unit_statistics, get_all_properties, get_all_units, create_unit, update_unit, get_residents_by_unit
 from app.models import Unit, Property, Resident
-from flask import Blueprint, render_template, abort, request, redirect, url_for, flash
+from flask import Blueprint, render_template, abort, request, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from app.services.auth import role_required
 
@@ -122,4 +122,36 @@ def edit(unit_id):
 
     return redirect(url_for('units.index'))
 
-        
+# Retrieve resident assignments for specific unit
+@units_bp.route('/<int:unit_id>/residents', methods=['GET'])
+@role_required('system_owner', 'estate_admin', 'security_supervisor')
+def residents(unit_id):
+    # Retieve the residents assigned to this unit 
+    try:
+        residents = get_residents_by_unit(unit_id)
+    except PermissionError:
+        abort(403)
+    except ValueError:
+        abort(404)
+
+    # Convert each Resident model object into a dictionary
+    resident_data = [
+        {
+            'id': resident.id,
+            'full_name': resident.full_name,
+            'resident_code': resident.resident_code,
+            'email': resident.email,
+            'phone_number': resident.phone_number,
+            'is_active': resident.is_active
+        }
+        for resident in residents
+    ]
+
+    # Send the resident data back to the browser
+    return jsonify({'residents': resident_data})
+
+    
+
+    
+
+    
