@@ -229,6 +229,10 @@ document.querySelectorAll('.view-residents-button').forEach(button => {
         
         // Find the container where the resident cards appear.
         const residentList = document.getElementById('resident-assignments-list');
+
+        // Show loading state when the modal is opened
+        const loadingState = document.getElementById('loading-state');
+        loadingState.style.display = 'block';
         
         // Request the residents assigned to this unit
         try {
@@ -248,12 +252,15 @@ document.querySelectorAll('.view-residents-button').forEach(button => {
             // Check whether this unit has any residents asssigned to it
             if (data.residents.length === 0) {
                 emptyState.style.display = 'block';
+                loadingState.style.display = 'none';
                 residentList.style.display = 'none';
                 
                 
             } else {
                 // Hide the empty state when residents exist.
                 emptyState.style.display = 'none';
+                loadingState.style.display = 'none';
+                residentList.style.display = 'block';
             }
 
     
